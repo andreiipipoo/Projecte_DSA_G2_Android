@@ -40,7 +40,7 @@ public class Home extends AppCompatActivity {
         });
 
         shopDash1 = (Button) findViewById(R.id.shopDashBtn);
-        shop.setOnClickListener(new View.OnClickListener() {
+        shopDash1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -50,7 +50,7 @@ public class Home extends AppCompatActivity {
         });
 
         shopDash2 = (Button) findViewById(R.id.shopDashBtn2);
-        shop.setOnClickListener(new View.OnClickListener() {
+        shopDash2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
