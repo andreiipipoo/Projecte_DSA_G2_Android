@@ -13,6 +13,7 @@ public class Home extends AppCompatActivity {
     Button shop;
     Button shopDash1;
     Button shopDash2;
+    Button perfilUsuario;
 
     Button logout;
     private ProgressBar progressBar;
@@ -28,6 +29,16 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         progressBar = findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.GONE);
+
+        perfilUsuario = (Button) findViewById(R.id.perfilBtn);
+        perfilUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                Intent i = new Intent (Home.this, Perfil.class);
+                startActivity(i);
+            }
+        });
 
         shop = (Button) findViewById(R.id.ShopBtn);
         shop.setOnClickListener(new View.OnClickListener() {

@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import com.example.aaaa.api.APITrappy;
+import com.example.aaaa.api.Client;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +36,7 @@ public class ShopDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_dashboard);
+        apiTrappy = Client.getInstance().getApiTrappy();
 
         volver3 = findViewById(R.id.volver4);
 
