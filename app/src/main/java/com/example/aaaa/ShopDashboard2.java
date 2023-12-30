@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import com.example.aaaa.api.APITrappy;
+import com.example.aaaa.api.Client;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +34,8 @@ public class ShopDashboard2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_dashboard2);
         volver4 = findViewById(R.id.volver4);
+        apiTrappy = Client.getInstance().getApiTrappy();
+
 
         Timer timer = new Timer();
         volver4.setOnClickListener(new View.OnClickListener() {

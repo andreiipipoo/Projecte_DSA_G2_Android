@@ -1,5 +1,6 @@
 package com.example.aaaa;
 
+import android.content.ComponentName;
 import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,10 +10,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.text.BreakIterator;
+
 public class Home extends AppCompatActivity {
     Button shop;
     Button shopDash1;
     Button shopDash2;
+    Button perfilUsuario;
+    Button play;
+    static int REQUEST_CODE_1 = 1;
 
     Button logout;
     private ProgressBar progressBar;
@@ -28,6 +34,31 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         progressBar = findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.GONE);
+
+        perfilUsuario = (Button) findViewById(R.id.perfilBtn);
+        perfilUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                Intent i = new Intent (Home.this, Perfil.class);
+                startActivity(i);
+            }
+        });
+
+        play = (Button) findViewById(R.id.PlayBtn);
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                Intent play = new Intent (); //En vez del segundo Home.class hay que poner
+                //la actividad en la que esté el juego.
+                play.setComponent(new ComponentName("dsa.app2", "dsa.app2.Activity3"));
+
+                play.putExtra("input","Aquí iría la info que queramos");
+                startActivityForResult(play, Home.REQUEST_CODE_1);
+                startActivity(play);
+            }
+        });
 
         shop = (Button) findViewById(R.id.ShopBtn);
         shop.setOnClickListener(new View.OnClickListener() {

@@ -58,12 +58,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintTop_toBottomOf="@+id/ShopBtn" android:layout_marginTop="12dp"/>
+
     <Button
-            android:text="Tienda Dashboard 2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/shopDashBtn2"
-            app:layout_constraintTop_toBottomOf="@+id/shopDashBtn" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
-    />
+        android:id="@+id/shopDashBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Tienda Dashboard 2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shopDashBtn" />
+
+    <Button
+        android:id="@+id/perfilBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:text="Perfil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shopDashBtn2"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
