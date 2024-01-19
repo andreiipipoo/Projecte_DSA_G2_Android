@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="136dp"
-            android:text="HAVE A QUESTION?"
+            android:text="¿Tienes una pregunta?"
             android:textColor="@color/lavender"
             android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,8 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="Your Username"
-                android:text=""/>
+                android:hint="Tu nombre"
+                android:text="" android:textColor="@color/lavender" android:textColorHint="@color/lavender"/>
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -94,8 +94,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="Your Message"
-                android:text=""/>
+                android:hint="Escribe aquí tu pregunta"
+                android:text="" android:textColor="@color/lavender" android:textColorHint="@color/lavender"/>
 
     </com.google.android.material.textfield.TextInputLayout>
     <Button
@@ -106,7 +106,7 @@
             android:layout_marginTop="484dp"
             android:layout_marginEnd="50dp"
             android:onClick="questionReport"
-            android:text="Submit Question"
+            android:text="Enviar pregunta"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,8 +152,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:hint="Question Title"
-                android:text=""/>
+                android:hint="Título"
+                android:text="" android:textColor="@color/lavender" android:textColorHint="@color/lavender"/>
 
     </com.google.android.material.textfield.TextInputLayout>
     <Button

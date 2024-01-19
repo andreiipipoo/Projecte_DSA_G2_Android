@@ -1,5 +1,6 @@
 package com.example.aaaa;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.*;
@@ -20,6 +21,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,10 +37,19 @@ public class Denuncia extends AppCompatActivity {
     ImageButton volver;
     ProgressBar progressBar;
 
+    @SuppressLint("SimpleDateFormat")
+    private String obtainDate(String s) {
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(s);
+        return simpleDateFormat.format(date);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_denuncia);
+        this.date=obtainDate("yyyy-MM-dd");
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
         progressBar.setVisibility(View.GONE);
         apiTrappy = Client.getInstance().getApiTrappy();
@@ -55,8 +68,7 @@ public class Denuncia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                TextInputEditText dateText = (TextInputEditText) findViewById(R.id.fechaText);
-                date = dateText.getText().toString();
+
                 Log.d("Valor fecha: ", String.valueOf(date));
 
                 TextInputEditText titleText = (TextInputEditText) findViewById(R.id.titleText);
