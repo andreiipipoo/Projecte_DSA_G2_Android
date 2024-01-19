@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:backgroundTint="#070000"
+    android:foregroundTint="#000000"
+    android:visibility="visible"
+    tools:context=".Register">
+
+
+    <Button
+        android:id="@+id/RegisterBtn"
+        android:layout_width="157dp"
+        android:layout_height="62dp"
+        android:onClick="register"
+        android:text="REGISTER"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password2"
+        app:layout_constraintVertical_bias="0.573" />
+
+    <ImageButton
+        android:id="@+id/volverBtn"
+        android:layout_width="75dp"
+        android:layout_height="54dp"
+        android:background="@color/lavender"
+        android:backgroundTint="@color/lavender"
+        android:contentDescription="Enter How Much Cookies You Want"
+        android:onClick="volver"
+        app:layout_constraintBottom_toTopOf="@+id/Notif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07999998"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <TextView
+        android:id="@+id/Notif"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
+        android:text="NULL"
+        android:textAlignment="center"
+        android:textColor="@color/lavender"
+        android:textColorHint="#FFFFFF"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.641"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.866" />
+
+    <EditText
+        android:id="@+id/password1"
+        android:layout_width="335dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="9dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:backgroundTintMode="src_atop"
+        android:ems="10"
+        android:hint="Escribe aquí tu contraseña"
+        android:inputType="textPassword"
+        android:onClick="password"
+        android:textColor="@color/lavender"
+        android:textColorHint="@color/lavender"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.43" />
+
+    <EditText
+        android:id="@+id/password2"
+        android:layout_width="335dp"
+        android:layout_height="78dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#F6F6F6"
+        android:backgroundTintMode="src_atop"
+        android:ems="10"
+
+        android:hint="Confirma aquí tu contraseña"
+        android:inputType="textPassword"
+        android:onClick="password"
+        android:shadowColor="#FDFDFD"
+        android:textColor="@color/lavender"
+        android:textColorHint="@color/lavender"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password1"
+        app:layout_constraintVertical_bias="0.100000024" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="407dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#FBFBFB"
+        android:backgroundTintMode="src_atop"
+        android:foregroundTint="#FFFAFA"
+        android:foregroundTintMode="src_atop"
+        android:onClick="username"
+        android:textColorHint="@color/lavender"
+        app:endIconTint="#FFFDFD"
+        app:endIconTintMode="src_atop"
+        app:errorIconTint="#F6F4F4"
+        app:errorIconTintMode="src_atop"
+        app:hintTextColor="@color/lavender"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.31"
+        app:passwordToggleTint="#F1ECEC"
+        app:passwordToggleTintMode="src_atop"
+        app:prefixTextColor="#FFFFFF"
+        app:startIconTint="#FAF8F8"
+        app:startIconTintMode="src_atop">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FDFDFD"
+            android:backgroundTint="#FBF8F8"
+            android:backgroundTintMode="src_atop"
+            android:drawableTint="#FBF6F6"
+            android:drawableTintMode="src_atop"
+            android:foregroundTint="#F8F7F7"
+            android:foregroundTintMode="src_atop"
+            android:hint="Nombre de usuario"
+            android:shadowColor="@color/white"
+            android:textColor="@color/lavender"
+            android:textColorHighlight="#F8F5F5"
+            android:textColorHint="@color/lavender"
+            android:textColorLink="#F8F7F7"
+            android:textSize="22sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/password1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/RegisterTitle"
+        android:layout_width="215dp"
+        android:layout_height="49dp"
+        android:fontFamily="@font/nightmarecodehack"
+        android:text="REGISTER"
+        android:textAlignment="center"
+        android:textColor="@color/lavender"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/Notif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.477" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/mail"
+        android:layout_width="408dp"
+        android:layout_height="72dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#F4F3F3"
+        android:backgroundTintMode="src_atop"
+        android:drawableTint="#FFFDFD"
+        android:drawableTintMode="src_atop"
+        android:foregroundTint="#F8F6F6"
+        android:foregroundTintMode="src_atop"
+        android:hint="   Dirección de correo"
+        android:shadowColor="#FBFAFA"
+        android:textColor="@color/lavender"
+        android:textColorHighlight="#FBF9F9"
+        android:textColorHint="@color/lavender"
+        android:textColorLink="#F1EDED"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/password1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toEndOf="@+id/volverBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01999998" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="360dp"
+        android:layout_height="29dp"
+        android:fontFamily="@font/nightmarecodehack"
+        android:text="¡Únete a la família CROACKY!"
+        android:textAlignment="center"
+        android:textColor="@color/lavender"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/Notif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterTitle" />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="391dp"
+        android:layout_height="61dp"
+        android:backgroundTint="#FBFAFA"
+        android:backgroundTintMode="src_atop"
+        android:hapticFeedbackEnabled="false"
+        android:text="Número de teléfono"
+        android:textAlignment="textStart"
+        android:textColor="@color/lavender"
+        android:textColorHighlight="#FDFCFC"
+        android:textColorHint="@color/lavender"
+        android:textColorLink="#FFFFFF"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
