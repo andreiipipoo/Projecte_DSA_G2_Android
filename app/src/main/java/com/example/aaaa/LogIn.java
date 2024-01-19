@@ -1,5 +1,7 @@
 package com.example.aaaa;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -82,23 +84,58 @@ public class LogIn extends AppCompatActivity {
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         code = String.valueOf(response.code());
                         Log.d("Code", ""+response.code());
-                        if(code.equals("201")){
+                        if(code.equals("200")){
                             TextView success = (TextView) findViewById(R.id.notif);
                             success.setText("Te has logeado correctamente");
                             success.setVisibility(View.VISIBLE);
                             saveAuthenticationState(true);
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    startActivity(home);
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
+                            /*
                             timer.schedule(new TimerTask() {
                                 public void run() {
-                                    /*progressBar.setVisibility(View.GONE);*/
+
                                     startActivity(home);
                                 }
                             }, 2000);
+
+                             */
 
 
                         }
                         else if (code.equals("404")){
                             TextView success = (TextView) findViewById(R.id.notif);
-                            success.setText("Usuario o contraseña incorrecto");
+                            success.setText("No se ha encontrado ese nombre de usuario");
+                            success.setVisibility(View.VISIBLE);
+
+                            timer.schedule(new TimerTask() {
+                                public void run() {
+                                    /*progressBar.setVisibility(View.GONE);*/
+                                    startActivity(l);
+                                }
+                            }, 2000);
+                        }
+                        else if (code.equals("405")){
+                            TextView success = (TextView) findViewById(R.id.notif);
+                            success.setText("Contraseña incorrecta");
+                            success.setVisibility(View.VISIBLE);
+
+                            timer.schedule(new TimerTask() {
+                                public void run() {
+                                    /*progressBar.setVisibility(View.GONE);*/
+                                    startActivity(l);
+                                }
+                            }, 2000);
+                        }
+                        else if (code.equals("500")){
+                            TextView success = (TextView) findViewById(R.id.notif);
+                            success.setText("VALIDATION ERROR");
                             success.setVisibility(View.VISIBLE);
 
                             timer.schedule(new TimerTask() {

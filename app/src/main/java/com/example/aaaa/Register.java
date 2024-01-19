@@ -1,5 +1,7 @@
 package com.example.aaaa;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +31,7 @@ public class Register extends AppCompatActivity {
     ImageButton volver;
     String user1;
     String phone;
-    String mail;
+    String email;
     String UserPassword1;
     String UserPassword2;
     APITrappy apiTrappy;
@@ -41,6 +43,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         apiTrappy = Client.getInstance().getApiTrappy();
         Intent l = new Intent(Register.this, LogIn.class);
+        Intent r = new Intent(Register.this, Register.class);
         Timer timer = new Timer();
         apiTrappy = Client.getInstance().getApiTrappy();
 
@@ -71,8 +74,8 @@ public class Register extends AppCompatActivity {
                 Log.d("Valor teléfono: ", String.valueOf(phone));
 
                 TextInputEditText mailaddress = (TextInputEditText) findViewById(R.id.mail);
-                mail = mailaddress.getText().toString();
-                Log.d("Valor mail: ", String.valueOf(mail));
+                email = mailaddress.getText().toString();
+                Log.d("Valor mail: ", String.valueOf(email));
 
                 EditText password1 = (EditText) findViewById(R.id.password1);
                 UserPassword1 = password1.getText().toString();
@@ -82,11 +85,11 @@ public class Register extends AppCompatActivity {
                 UserPassword2 = password2.getText().toString();
                 Log.d("Valor password 2: ", String.valueOf(UserPassword2));
 
-                Usuario usuario = new Usuario(user1, UserPassword1, phone, mail);
+                Usuario usuario = new Usuario(user1, UserPassword1, phone, email);
 
 
 
-                apiTrappy.register(new com.example.aaaa.models.Usuario(user1,UserPassword1,phone,mail)).enqueue(new Callback<Void>() {
+                apiTrappy.register(new com.example.aaaa.models.Usuario(user1,UserPassword1,phone,email)).enqueue(new Callback<Void>() {
                 //apiTrappy.register(new com.example.aaaa.models.RegisterModel(user1, UserPassword1, mail, tlf)).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
@@ -96,49 +99,74 @@ public class Register extends AppCompatActivity {
                             TextView success = (TextView) findViewById(R.id.Notif);
                             success.setText("Te has registrado correctamente.");
                             success.setVisibility(View.VISIBLE);
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    startActivity(l);
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
 
+/*
                             timer.schedule(new TimerTask() {
                                 public void run() {
-                                    /*i.putExtra("user", user1);
-                                    i.putExtra("password", UserPassword1);
-                                     */
+
                                     startActivity(l);
                                     progressBar.setVisibility(View.GONE);
 
                                 }
+
+
                             }, 2000);
-                        } else if (response.code() == 404) {
+
+ */
+
+
+
+
+
+                        } else if (response.code() == 405) {
                             TextView success = (TextView) findViewById(R.id.Notif);
-                            success.setText("Algunos de los datos introducidos no son válidos.");
+                            success.setText("El nombre de usuario no está disponible");
                             success.setVisibility(View.VISIBLE);
 
-                            timer.schedule(new TimerTask() {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    /*username.setText("");
-                                    phonenumber.setText("");
-                                    mailaddress.setText("");
-                                    password1.setText("");
-                                    password2.setText("");*/
-                                    Intent o = new Intent(Register.this, Register.class);
-                                    startActivity(o);
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    startActivity(r);
                                     progressBar.setVisibility(View.GONE);
                                 }
-                            }, 2000);
+                            }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
                         }
-                        else if (response.code() == 401) {
+                        else if (response.code() == 406) {
                             TextView success = (TextView) findViewById(R.id.Notif);
-                            success.setText("Las contraseñas no coinciden.");
+                            success.setText("El correo no está disponible");
                             success.setVisibility(View.VISIBLE);
 
-                            timer.schedule(new TimerTask() {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    /*password1.setText("");
-                                    password2.setText("");*/
-                                    Intent o = new Intent(Register.this, Register.class);
-                                    startActivity(o);
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    startActivity(r);
                                     progressBar.setVisibility(View.GONE);
                                 }
-                            }, 2000);
+                            }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
+                        }
+                        else if (response.code() == 500) {
+                            TextView success = (TextView) findViewById(R.id.Notif);
+                            success.setText("VALIDATION ERROR");
+                            success.setVisibility(View.VISIBLE);
+
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    startActivity(r);
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
                         }
                     }
                     @Override
@@ -161,7 +189,7 @@ public class Register extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(TEXT1, user1);
         editor.putString(TEXT2, UserPassword1);
-        editor.putString(TEXT3, mail);
+        editor.putString(TEXT3, email);
         editor.putString(TEXT4, phone);
         editor.apply();
     }

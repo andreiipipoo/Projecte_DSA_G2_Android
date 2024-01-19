@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +44,7 @@ public class FormularioQuestion extends AppCompatActivity {
     private TextInputEditText titleInput;
     private TextInputEditText messageInput;
     private TextInputEditText senderInput;
+    private TextView notif;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,7 @@ public class FormularioQuestion extends AppCompatActivity {
     }
 
     public void returnFunction(View view) {
-        Intent intentRegister = new Intent(FormularioQuestion.this, LogIn.class);
+        Intent intentRegister = new Intent(FormularioQuestion.this, NewHome.class);
         startActivity(intentRegister);
     }
 
@@ -61,22 +64,36 @@ public class FormularioQuestion extends AppCompatActivity {
         Question a = new Question(this.date, this.titleInput.getText().toString(),this.messageInput.getText().toString(),this.senderInput.getText().toString());
         APIservice = Client.getInstance().getApiTrappy();
         Call<Void> call = APIservice.postQuestion(a);
+        notif = findViewById(R.id.textViewNotif);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 switch (response.code()) {
-                    case 201:
-                        Snackbar snaky201 = Snackbar.make(view, "Question has been send it!", 3000);
-                        snaky201.show();
-                        setLabel();
-                        break;
-                    case 403:
-                        Snackbar snaky403 = Snackbar.make(view, "Error reporting the question", 3000);
-                        snaky403.show();
+                    case 200:
+                        notif.setText("Tu pregunta se ha envíado correctamente");
+                        notif.setVisibility(View.VISIBLE);
+                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Tu código de actualización de la interfaz de usuario va aquí
+
+                                Intent i = new Intent(FormularioQuestion.this, FormularioQuestion.class);
+                                startActivity(i);
+                            }
+                        }, 2000);  // El retraso en milisegundos antes de que se ejecute tu código
                         break;
                     case 500:
-                        Snackbar snaky500 = Snackbar.make(view, "Please fill in the sender text!", 3000);
-                        snaky500.show();
+                        notif.setText("VALIDATION ERROR");
+                        notif.setVisibility(View.VISIBLE);
+                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Tu código de actualización de la interfaz de usuario va aquí
+
+                                Intent i = new Intent(FormularioQuestion.this, FormularioQuestion.class);
+                                startActivity(i);
+                            }
+                        }, 2000);  // El retraso en milisegundos antes de que se ejecute tu código
                         break;
                 }
             }

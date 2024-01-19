@@ -28,7 +28,7 @@ public interface APITrappy {
          */
         @POST("items/shop")
         Call<Void> comprar(@Body Item item);
-        @POST("player/register")
+        @POST("player/signup")
         Call<Void> register(@Body Usuario register);
         @POST("trappy/buyItem/{idItem}/{idPlayer}")
         Call<Void> buy(@Body String idItem, String idPlayer);
@@ -36,10 +36,10 @@ public interface APITrappy {
         @GET("items/shop")
         Call<Item> getItems(@Body Item item);
 
-        @POST("player/issue")
+        @POST("minims/addIssue")
         Call<Void> denunciar(@Body DenunciaModel denuncia);
 
-        @POST("player/question")
+        @POST("minims/addQuestionFromPlayer")
         Call<Void> postQuestion(@Body Question question);
         @GET("/player/messages")
         Call<Message> getMessages();

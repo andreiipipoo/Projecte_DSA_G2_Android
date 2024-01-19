@@ -17,21 +17,21 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="136dp"
             android:text="HAVE A QUESTION?"
             android:textColor="@color/lavender"
             android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" app:layout_constraintHorizontal_bias="0.491"
+            tools:ignore="MissingConstraints" app:layout_constraintHorizontal_bias="0.497"
             android:fontFamily="@font/nightmarecodehack"/>
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/senderNameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="312dp"
+            android:layout_marginTop="384dp"
             android:layout_marginEnd="50dp"
             android:background="#00FDFDFD"
             android:backgroundTint="#FAF7F7"
@@ -42,20 +42,16 @@
             app:boxBackgroundColor="#3CFAF8F8"
             app:boxStrokeColor="#FFFFFF"
             app:boxStrokeErrorColor="#FFFFFF"
-            app:counterOverflowTextColor="#ECE7E7"
-            app:counterTextColor="#F1EEEE"
             app:cursorColor="#F6F0F0"
             app:cursorErrorColor="#F3EEEE"
-            app:endIconTint="#FFFFFF"
             app:endIconTintMode="src_atop"
-            app:errorIconTint="#FBFAFA"
             app:errorIconTintMode="src_atop"
             app:errorTextColor="#EFE7E7"
             app:helperTextTextColor="#FBFBFB"
             app:hintTextColor="#F8F8F8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="1.0">
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/senderNametext"
@@ -79,23 +75,19 @@
             app:boxBackgroundColor="#3CFAF8F8"
             app:boxStrokeColor="#FFFFFF"
             app:boxStrokeErrorColor="#FFFFFF"
-            app:counterOverflowTextColor="#ECE7E7"
-            app:counterTextColor="#F1EEEE"
             app:cursorColor="#F6F0F0"
             app:cursorErrorColor="#F3EEEE"
-            app:endIconTint="#FFFFFF"
             app:endIconTintMode="src_atop"
-            app:errorIconTint="#FBFAFA"
             app:errorIconTintMode="src_atop"
             app:errorTextColor="#EFE7E7"
             app:helperTextTextColor="#FBFBFB"
             app:hintTextColor="#F8F8F8"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="224dp"
+            android:layout_marginTop="292dp"
             android:layout_marginEnd="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="1.0">
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/messageNametext"
@@ -111,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="412dp"
+            android:layout_marginTop="484dp"
             android:layout_marginEnd="50dp"
             android:onClick="questionReport"
             android:text="Submit Question"
@@ -120,12 +112,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" android:backgroundTint="@color/lavender"/>
+
+    <!-- Message Box - Player Input -->
+
+    <!-- Sender Box - Submit Question Button -->
+
+    <!-- Return Button -->
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/titleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="148dp"
+            android:layout_marginTop="200dp"
             android:layout_marginEnd="50dp"
             android:background="#00FDFDFD"
             android:backgroundTint="#FAF7F7"
@@ -136,13 +134,10 @@
             app:boxBackgroundColor="#3CFAF8F8"
             app:boxStrokeColor="#FFFFFF"
             app:boxStrokeErrorColor="#FFFFFF"
-            app:counterOverflowTextColor="#ECE7E7"
-            app:counterTextColor="#F1EEEE"
             app:cursorColor="#F6F0F0"
             app:cursorErrorColor="#F3EEEE"
             app:endIconTint="#FFFFFF"
             app:endIconTintMode="src_atop"
-            app:errorIconTint="#FBFAFA"
             app:errorIconTintMode="src_atop"
             app:errorTextColor="#EFE7E7"
             app:helperTextTextColor="#FBFBFB"
@@ -150,7 +145,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="1.0"
-            >
+    >
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/titleNametext"
@@ -161,12 +156,6 @@
                 android:text=""/>
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Message Box - Player Input -->
-
-    <!-- Sender Box - Submit Question Button -->
-
-    <!-- Return Button -->
     <Button
             android:id="@+id/returnBtn2"
             android:layout_width="wrap_content"
@@ -194,4 +183,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.955"
             app:layout_constraintVertical_bias="0.023"/>
+    <TextView
+            android:text="Notif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textViewNotif"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView" app:layout_constraintVertical_bias="0.786"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="20sp" android:textColor="@color/lavender" android:visibility="invisible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

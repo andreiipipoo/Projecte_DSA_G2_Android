@@ -164,6 +164,9 @@ public class NewHome extends AppCompatActivity {
         pinkCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                Intent i = new Intent (NewHome.this, Denuncia.class);
+                startActivity(i);
 
             }
         });
@@ -173,6 +176,9 @@ public class NewHome extends AppCompatActivity {
         virtualCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                Intent w = new Intent (NewHome.this, FormularioQuestion.class);
+                startActivity(w);
 
             }
         });

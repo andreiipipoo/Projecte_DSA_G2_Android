@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 public void run() {
-                    Intent i = new Intent(MainActivity.this, Home.class);
+                    Intent i = new Intent(MainActivity.this, NewHome.class);
                     startActivity(i);
                 }
             }, 3000);
