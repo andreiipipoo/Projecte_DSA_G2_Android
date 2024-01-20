@@ -32,8 +32,8 @@ public interface APITrappy {
         Call<Void> register(@Body Usuario register);
 
 
-        @POST("trappy/buyItem/{idItem}/{idPlayer}")
-        Call<Void> buy(@Body String idItem, String idPlayer);
+        @POST("trappy/buyItem/{idItem}/{usernamePlayer}")
+        Call<Void> buy(@Path ("idItem") String idItem, @Path ("usernamePlayer") String usernamePlayer);
 
         @GET("items/shop")
         Call<Item> getItems(@Body Item item);

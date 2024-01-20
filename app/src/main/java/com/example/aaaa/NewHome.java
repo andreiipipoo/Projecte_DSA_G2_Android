@@ -170,7 +170,7 @@ public class NewHome extends AppCompatActivity {
             }
         });
 
-
+        //HECHO
         tiendaCard = findViewById(R.id.tiendaCard);
 
         tiendaCard.setOnClickListener(new View.OnClickListener() {

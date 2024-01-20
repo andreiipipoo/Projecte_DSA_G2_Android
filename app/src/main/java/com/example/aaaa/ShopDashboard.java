@@ -1,5 +1,6 @@
 package com.example.aaaa;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -40,6 +41,8 @@ public class ShopDashboard extends AppCompatActivity {
         apiTrappy = Client.getInstance().getApiTrappy();
 
         volver3 = findViewById(R.id.volver4);
+        SharedPreferences sharedPreferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
 
         Timer timer = new Timer();
         volver3.setOnClickListener(new View.OnClickListener() {
@@ -55,15 +58,15 @@ public class ShopDashboard extends AppCompatActivity {
         ranaCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idplayer = "ejemplo";
+                String usernameplayer = username;
                 String iditem = "1";
 
                 Log.d("Nombre item: botas","");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",idplayer);
+                Log.d("Id player: id ",usernameplayer);
 
 
-                apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
@@ -110,15 +113,14 @@ public class ShopDashboard extends AppCompatActivity {
         desiertoCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idplayer = "ejemplo";
-                String iditem = "2";
+                String usernameplayer = username;                String iditem = "2";
 
                 Log.d("Nombre item:","espada");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",idplayer);
+                Log.d("Id player: id ",usernameplayer);
 
 
-                apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
@@ -164,15 +166,15 @@ public class ShopDashboard extends AppCompatActivity {
         maskCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idplayer = "ejemplo";
+                String usernameplayer = "ejemplo";
                 String iditem = "3";
 
                 Log.d("Nombre item: pocion","");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",idplayer);
+                Log.d("Id player: id ",usernameplayer);
 
 
-                apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
@@ -218,15 +220,15 @@ public class ShopDashboard extends AppCompatActivity {
         pinkCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idplayer = "ejemplo";
+                String usernameplayer = "ejemplo";
                 String iditem = "4";
 
                 Log.d("Nombre item: baya","");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",idplayer);
+                Log.d("Id player: id ",usernameplayer);
 
 
-                apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
@@ -272,15 +274,15 @@ public class ShopDashboard extends AppCompatActivity {
         virtualCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idplayer = "ejemplo";
+                String usernameplayer = "ejemplo";
                 String iditem = "5";
 
                 Log.d("Nombre item: magnesio","");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",idplayer);
+                Log.d("Id player: id ",usernameplayer);
 
 
-                apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
@@ -326,15 +328,15 @@ public class ShopDashboard extends AppCompatActivity {
         scientistCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idplayer = "ejemplo";
+                String usernameplayer = "ejemplo";
                 String iditem = "6";
 
                 Log.d("Nombre item: escudo","");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",idplayer);
+                Log.d("Id player: id ",usernameplayer);
 
 
-                apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
