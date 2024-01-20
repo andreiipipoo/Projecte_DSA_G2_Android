@@ -19,8 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aaaa.api.APITrappy;
 import com.example.aaaa.api.Client;
 import com.example.aaaa.models.Insignia;
-import com.example.aaaa.models.Item;
+import com.example.aaaa.models.Usuario;
 import com.google.android.material.textfield.TextInputEditText;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 import java.util.TimerTask;
@@ -34,11 +36,16 @@ import retrofit2.Response;
 public class Perfil extends AppCompatActivity {
     Button enviar;
     ImageButton volver;
-    String id;
+    String username1;
     private ProgressBar progressBar;
     APITrappy apiTrappy;
     static String[] miVector = new String[100];
     List<Insignia> ejemploInsignias;
+    TextView usernameView;
+    TextView idView;
+    TextView tlfView;
+    TextView croCoinsView;
+    TextView emailView;
 
     public static String[] getVector(){
         return miVector;
@@ -55,12 +62,15 @@ public class Perfil extends AppCompatActivity {
 
         Timer timer = new Timer();
 
+        /*
         RecyclerView recyclerView = findViewById(R.id.recyclerView2);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager2);
 
         MyAdapter2 adapter = new MyAdapter2();
         recyclerView.setAdapter(adapter);
+
+         */
 
         volver = (ImageButton) findViewById(R.id.volverBtn2);
         volver.setOnClickListener(new View.OnClickListener() {
@@ -80,9 +90,9 @@ public class Perfil extends AppCompatActivity {
 
                 ejemploInsignias.clear();
 
-                TextInputEditText idUser = (TextInputEditText) findViewById(R.id.idUsuario1);
-                id = idUser.getText().toString();
-                Log.d("Valor id introducido: ", String.valueOf(id));
+                TextInputEditText username2 = (TextInputEditText) findViewById(R.id.usernameUsuario1);
+                username1 = username2.getText().toString();
+                Log.d("Valor id introducido: ", String.valueOf(username1));
 
                 TextView username = (TextView) findViewById(R.id.nombreUsuario2);
                 username.setText(miVector[0]);
@@ -90,12 +100,54 @@ public class Perfil extends AppCompatActivity {
                 ImageView userImage = (ImageView) findViewById(R.id.imagenUsuario2);
                 userImage.setImageURI(Uri.parse(miVector[1]));
 
+                usernameView = (TextView) findViewById(R.id.textView3);
+                idView = (TextView) findViewById(R.id.textView2);
+                tlfView= (TextView) findViewById(R.id.textView4);
+                croCoinsView= (TextView) findViewById(R.id.textView6);
+                emailView= (TextView) findViewById(R.id.textView5);
+
                 //MINIMO 2
-                apiTrappy.recibirInsignia(id).enqueue(new Callback<Void>() {
+                apiTrappy.recibirInsignia(username1).enqueue(new Callback<Usuario>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                         Log.d("Código de Register: ", String.valueOf(response.code()));
 
+                        if(response.code()==201){
+                            String id;
+                            String username;
+                            String telephone;
+                            String email;
+                            int croCoins;
+
+                            Usuario usuario = new Usuario();
+
+                            usuario = response.body();
+
+                            id = usuario.getId();
+                            username = usuario.getUsername();
+                            telephone = usuario.getTlf();
+                            email = usuario.getMail();
+                            croCoins = usuario.getCroCoins();
+
+                            idView.setText(id);
+                            usernameView.setText(username);
+                            tlfView.setText(telephone);
+                            emailView.setText(email);
+                            croCoinsView.setText(String.valueOf(croCoins));
+
+                        }
+                        else if (response.code() == 404) {
+
+                            timer.schedule(new TimerTask() {
+                                public void run() {
+                                    Intent o = new Intent(Perfil.this, Perfil.class);
+                                    startActivity(o);
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            }, 2000);
+                        }
+
+                        /*
                         if (response.code()==201) {
                             //Aquí estamos recibiendo la respuesta (la cual es un vector), y lo metemos en respuesta
                             String[] respuesta = new String[]{response.body().toString()};
@@ -132,17 +184,20 @@ public class Perfil extends AppCompatActivity {
 
                             timer.schedule(new TimerTask() {
                                 public void run() {
-                                    /*password1.setText("");
-                                    password2.setText("");*/
+
                                     Intent o = new Intent(Perfil.this, Perfil.class);
                                     startActivity(o);
                                     progressBar.setVisibility(View.GONE);
                                 }
                             }, 2000);
                         }
+
+                         */
+
+
                     }
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                    public void onFailure(Call<Usuario> call, Throwable t) {
                         String msg = "Error in retrofit: " + t.toString();
                         Log.d("Mensaje error Register", msg);
                         progressBar.setVisibility(View.GONE);

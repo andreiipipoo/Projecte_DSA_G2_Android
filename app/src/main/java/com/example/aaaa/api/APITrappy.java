@@ -14,8 +14,8 @@ import retrofit2.http.Path;
 
 public interface APITrappy {
 
-        @POST("player/insignias/{idPlayer}")
-        Call<Void> recibirInsignia(@Path ("idPlayer") String idPlayer);
+        @POST("player/{username}")
+        Call<Usuario> recibirInsignia(@Path ("username") String username);
 
 
         @POST("player/login")
@@ -30,6 +30,8 @@ public interface APITrappy {
         Call<Void> comprar(@Body Item item);
         @POST("player/signup")
         Call<Void> register(@Body Usuario register);
+
+
         @POST("trappy/buyItem/{idItem}/{idPlayer}")
         Call<Void> buy(@Body String idItem, String idPlayer);
 
@@ -41,7 +43,7 @@ public interface APITrappy {
 
         @POST("minims/addQuestionFromPlayer")
         Call<Void> postQuestion(@Body Question question);
-        @GET("/player/messages")
-        Call<Message> getMessages();
+        @GET("minims/getMessages")
+        Call<List<Message>> getMessages();
 }
 

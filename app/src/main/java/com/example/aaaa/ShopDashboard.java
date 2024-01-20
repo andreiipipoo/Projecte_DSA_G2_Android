@@ -59,8 +59,8 @@ public class ShopDashboard extends AppCompatActivity {
                 String iditem = "1";
 
                 Log.d("Nombre item: botas","");
-                Log.d("Id item: id ","");
-                Log.d("Id player: id ","");
+                Log.d("Id item: id ",iditem);
+                Log.d("Id player: id ",idplayer);
 
 
                 apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
@@ -113,9 +113,9 @@ public class ShopDashboard extends AppCompatActivity {
                 String idplayer = "ejemplo";
                 String iditem = "2";
 
-                Log.d("Nombre item: espada","");
-                Log.d("Id item: id ","");
-                Log.d("Id player: id ","");
+                Log.d("Nombre item:","espada");
+                Log.d("Id item: id ",iditem);
+                Log.d("Id player: id ",idplayer);
 
 
                 apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
@@ -168,8 +168,8 @@ public class ShopDashboard extends AppCompatActivity {
                 String iditem = "3";
 
                 Log.d("Nombre item: pocion","");
-                Log.d("Id item: id ","");
-                Log.d("Id player: id ","");
+                Log.d("Id item: id ",iditem);
+                Log.d("Id player: id ",idplayer);
 
 
                 apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
@@ -222,8 +222,8 @@ public class ShopDashboard extends AppCompatActivity {
                 String iditem = "4";
 
                 Log.d("Nombre item: baya","");
-                Log.d("Id item: id ","");
-                Log.d("Id player: id ","");
+                Log.d("Id item: id ",iditem);
+                Log.d("Id player: id ",idplayer);
 
 
                 apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
@@ -276,8 +276,8 @@ public class ShopDashboard extends AppCompatActivity {
                 String iditem = "5";
 
                 Log.d("Nombre item: magnesio","");
-                Log.d("Id item: id ","");
-                Log.d("Id player: id ","");
+                Log.d("Id item: id ",iditem);
+                Log.d("Id player: id ",idplayer);
 
 
                 apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {
@@ -330,8 +330,8 @@ public class ShopDashboard extends AppCompatActivity {
                 String iditem = "6";
 
                 Log.d("Nombre item: escudo","");
-                Log.d("Id item: id ","");
-                Log.d("Id player: id ","");
+                Log.d("Id item: id ",iditem);
+                Log.d("Id player: id ",idplayer);
 
 
                 apiTrappy.buy(iditem,idplayer).enqueue(new Callback<Void>() {

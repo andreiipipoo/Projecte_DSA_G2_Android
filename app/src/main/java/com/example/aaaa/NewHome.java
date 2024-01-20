@@ -18,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -34,7 +35,9 @@ public class NewHome extends AppCompatActivity {
     APITrappy apiTrappy;
     ProgressBar progressBar;
     static int REQUEST_CODE_1 = 1;
-    static String[] miVector2 = new String[100];
+    int i;
+    String mensajeMostrado = "";
+    List<Message> mensajes = new ArrayList<>();
     private void clearAuthenticationInfo() {
         SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -60,24 +63,41 @@ public class NewHome extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
         apiTrappy = Client.getInstance().getApiTrappy();
 
+        /*
         mensaje = (TextView) findViewById(R.id.message);
-        apiTrappy = com.example.aaaa.api.Client.getInstance().getApiTrappy();
-        //Recogemos los datos que nos mandan desde la función getMessage() del backend (una lista de mensajes)
-        apiTrappy.getMessages().enqueue(new Callback<Message>() {
-            @Override
-            public void onResponse(Call<Message> call, Response<Message> response) {
-                if (response.isSuccessful()) {
-                    Message message1 = response.body();
-                    mensaje.setText(message1.getCuerpoMensaje());
-                } else {
+
+        if(mensajes.isEmpty()) { //Si la lista está vacía pedimos al BackEnd que nos mande toda la batería de mensajes
+            i=0;
+            Log.d("MENSAJES: ", "NO TENEMOS MENSAJES ASÍ QUE LOS PEDIMOS AL BACKEND.");
+            apiTrappy = com.example.aaaa.api.Client.getInstance().getApiTrappy();
+            //Recogemos los datos que nos mandan desde la función getMessage() del backend (una lista de mensajes)
+            apiTrappy.getMessages().enqueue(new Callback<List<Message>>() {
+                @Override
+                public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                    if (response.isSuccessful()) {
+                        mensajes = response.body();
+                    } else {
+                        Log.d("ERROR MENSAJE", "HA HABIDO UN ERROR RECIBIENDO LOS MENSAJES");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Message>> call, Throwable t) {
                     Log.d("ERROR MENSAJE", "HA HABIDO UN ERROR RECIBIENDO LOS MENSAJES");
                 }
-            }
-            @Override
-            public void onFailure(Call<Message> call, Throwable t) {
-                Log.d("ERROR MENSAJE", "HA HABIDO UN ERROR RECIBIENDO LOS MENSAJES");
-            }
-        });
+            });
+        }
+
+        if (!mensajes.isEmpty()) {
+            mensajeMostrado = mensajes.get(i).getCuerpoMensaje();
+            Log.d("MENSAJES QUE SE MUESTRA: ", mensajeMostrado);
+            mensaje.setText(mensajeMostrado);
+        } else {
+            Log.d("MENSAJES: ", "La lista de mensajes está vacía.");
+            // Aquí puedes manejar la situación en la que no hay mensajes disponibles.
+        }
+
+         */
 
         logout = findViewById(R.id.logoutbtn);
 
@@ -137,6 +157,7 @@ public class NewHome extends AppCompatActivity {
     }
          */
 
+        //HECHO
         perfilCard = findViewById(R.id.perfilCard);
 
         perfilCard.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +168,7 @@ public class NewHome extends AppCompatActivity {
                 startActivity(perfil);
             }
         });
+
 
         tiendaCard = findViewById(R.id.tiendaCard);
 
@@ -159,6 +181,7 @@ public class NewHome extends AppCompatActivity {
             }
         });
 
+        //HECHO
         pinkCard = findViewById(R.id.pinkCard);
 
         pinkCard.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +194,7 @@ public class NewHome extends AppCompatActivity {
             }
         });
 
+        //HECHO
         virtualCard = findViewById(R.id.virtualCard);
 
         virtualCard.setOnClickListener(new View.OnClickListener() {
@@ -183,12 +207,15 @@ public class NewHome extends AppCompatActivity {
             }
         });
 
+        //HECHO
         scientistCard = findViewById(R.id.scientistCard);
 
         scientistCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                progressBar.setVisibility(View.VISIBLE);
+                Intent perfil = new Intent (NewHome.this, Perfil.class);
+                startActivity(perfil);
             }
         });
     }

@@ -42,6 +42,7 @@ public class LogIn extends AppCompatActivity {
         sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("is_authenticated", isAuthenticated);
+        editor.putString("username",username);
         editor.apply();
     }
     @Override
@@ -87,8 +88,10 @@ public class LogIn extends AppCompatActivity {
                         if(code.equals("200")){
                             TextView success = (TextView) findViewById(R.id.notif);
                             success.setText("Te has logeado correctamente");
+                            
                             success.setVisibility(View.VISIBLE);
                             saveAuthenticationState(true);
+
                             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
