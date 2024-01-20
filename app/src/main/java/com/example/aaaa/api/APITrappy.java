@@ -45,5 +45,7 @@ public interface APITrappy {
         Call<Void> postQuestion(@Body Question question);
         @GET("minims/getMessages")
         Call<List<Message>> getMessages();
+        @POST("player/delete/{username}")
+        Call<Void> delete(@Path ("username") String username);
 }
 

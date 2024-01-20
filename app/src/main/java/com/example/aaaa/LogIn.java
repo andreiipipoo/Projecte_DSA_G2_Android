@@ -35,6 +35,7 @@ public class LogIn extends AppCompatActivity {
     String user;
     String UserPassword;
 
+
     private ProgressBar progressBar;
 
 
@@ -42,7 +43,6 @@ public class LogIn extends AppCompatActivity {
         sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("is_authenticated", isAuthenticated);
-        editor.putString("username",username);
         editor.apply();
     }
     @Override
@@ -74,10 +74,12 @@ public class LogIn extends AppCompatActivity {
                 user = username.getText().toString();
                 Log.d("Valor username Login: ", String.valueOf(user));
 
+
                 EditText password;
                 password = (EditText) findViewById(R.id.password);
                 UserPassword = password.getText().toString();
                 Log.d("Valor username Password Login: ", String.valueOf(UserPassword));
+
 
                 LoginModel loginModel = new LoginModel(user, UserPassword);
                 apiTrappy.login(new com.example.aaaa.models.LoginModel(user,UserPassword)).enqueue(new Callback<Void>(){
@@ -88,7 +90,8 @@ public class LogIn extends AppCompatActivity {
                         if(code.equals("200")){
                             TextView success = (TextView) findViewById(R.id.notif);
                             success.setText("Te has logeado correctamente");
-                            
+                            editor.putString("username", user);
+                            editor.putString("password", UserPassword);
                             success.setVisibility(View.VISIBLE);
                             saveAuthenticationState(true);
 

@@ -99,6 +99,7 @@ public class NewHome extends AppCompatActivity {
 
          */
 
+        //HECHO
         logout = findViewById(R.id.logoutbtn);
 
         Timer timer = new Timer();
@@ -214,7 +215,7 @@ public class NewHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                Intent perfil = new Intent (NewHome.this, Perfil.class);
+                Intent perfil = new Intent (NewHome.this, BorrarCuenta.class);
                 startActivity(perfil);
             }
         });
