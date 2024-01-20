@@ -32,37 +32,39 @@ public class BorrarCuenta extends AppCompatActivity {
     Button enviar;
     private ProgressBar progressBar;
     APITrappy apiTrappy;
+    String user;
+    String pass;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+        user = getIntent().getExtras().getString("user");
+        pass = getIntent().getExtras().getString("pass");
+        TextView notificacion = findViewById(R.id.notifBorrar);
 
         contraseña = (EditText) findViewById(R.id.password3);
 
         contraseña2 = contraseña.getText().toString();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        String password = sharedPreferences.getString("contraseña", "");
-        String username = sharedPreferences.getString("username", "");
 
         enviar = (Button) findViewById(R.id.buttonEnviar1);
         progressBar = findViewById(R.id.progressBar7);
 
-        if(!password.isEmpty() && !username.isEmpty()){
+        if(!contraseña2.isEmpty() && !user.isEmpty()){
             progressBar.setVisibility(View.VISIBLE);
-            if(password.equals(contraseña2)){
+            if(contraseña2.equals(pass)){
                 enviar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         progressBar.setVisibility(View.VISIBLE);
-                        apiTrappy.delete(username).enqueue(new Callback<Void>(){
+                        apiTrappy.delete(user).enqueue(new Callback<Void>(){
                             String code;
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 code = String.valueOf(response.code());
                                 Log.d("Code", ""+response.code());
                                 if(code.equals("201")){
-                                    TextView notificacion = findViewById(R.id.notifBorrar);
                                     notificacion.setVisibility(View.VISIBLE);
+                                    notificacion.setText("La cuenta se ha borrado correctamente");
                                     new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -105,6 +107,10 @@ public class BorrarCuenta extends AppCompatActivity {
                         Log.d("Code", "end login");
                     }
                 });
+            }
+            else {
+                notificacion.setVisibility(View.VISIBLE);
+                notificacion.setText("La contraseña no es correcta");
             }
         }
 

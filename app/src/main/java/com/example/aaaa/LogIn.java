@@ -90,10 +90,13 @@ public class LogIn extends AppCompatActivity {
                         if(code.equals("200")){
                             TextView success = (TextView) findViewById(R.id.notif);
                             success.setText("Te has logeado correctamente");
-                            editor.putString("username", user);
+                            /*editor.putString("username", user);
                             editor.putString("password", UserPassword);
+                             */
                             success.setVisibility(View.VISIBLE);
                             saveAuthenticationState(true);
+                            home.putExtra("user",user);
+                            home.putExtra("pass",UserPassword);
 
                             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                 @Override

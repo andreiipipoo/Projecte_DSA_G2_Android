@@ -85,11 +85,11 @@ public class Register extends AppCompatActivity {
                 UserPassword2 = password2.getText().toString();
                 Log.d("Valor password 2: ", String.valueOf(UserPassword2));
 
-                Usuario usuario = new Usuario(user1, UserPassword1, phone, email);
+                Usuario usuario = new Usuario(user1, UserPassword1, phone, email,"id",1);
 
 
 
-                apiTrappy.register(new com.example.aaaa.models.Usuario(user1,UserPassword1,phone,email)).enqueue(new Callback<Void>() {
+                apiTrappy.register(usuario).enqueue(new Callback<Void>() {
                 //apiTrappy.register(new com.example.aaaa.models.RegisterModel(user1, UserPassword1, mail, tlf)).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {

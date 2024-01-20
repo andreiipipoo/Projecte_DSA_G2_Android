@@ -38,6 +38,8 @@ public class NewHome extends AppCompatActivity {
     int i;
     String mensajeMostrado = "";
     List<Message> mensajes = new ArrayList<>();
+    String usuario;
+    String contraseña;
     private void clearAuthenticationInfo() {
         SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -62,6 +64,8 @@ public class NewHome extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar5);
         progressBar.setVisibility(View.GONE);
         apiTrappy = Client.getInstance().getApiTrappy();
+        usuario = getIntent().getExtras().getString("user");
+        contraseña = getIntent().getExtras().getString("pass");
 
         /*
         mensaje = (TextView) findViewById(R.id.message);
@@ -165,8 +169,10 @@ public class NewHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                Intent perfil = new Intent (NewHome.this, Perfil.class);
-                startActivity(perfil);
+                Intent borrar = new Intent (NewHome.this, BorrarCuenta.class);
+                borrar.putExtra("user",usuario);
+                borrar.putExtra("pass",contraseña);
+                startActivity(borrar);
             }
         });
 
