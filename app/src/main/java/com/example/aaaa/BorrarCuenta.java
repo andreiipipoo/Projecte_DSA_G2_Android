@@ -36,6 +36,7 @@ public class BorrarCuenta extends AppCompatActivity {
     String user;
     String pass;
     Button volver3;
+    Integer coins;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class BorrarCuenta extends AppCompatActivity {
         setContentView(R.layout.activity_borrarcuenta);
         user = getIntent().getExtras().getString("user");
         pass = getIntent().getExtras().getString("pass");
+        coins = getIntent().getExtras().getInt("coins");
         apiTrappy = Client.getInstance().getApiTrappy();
         TextView notificacion = findViewById(R.id.notifBorrar);
         contraseña = (EditText) findViewById(R.id.password3);
@@ -56,6 +58,7 @@ public class BorrarCuenta extends AppCompatActivity {
                 Intent borrar = new Intent (BorrarCuenta.this, NewHome.class);
                 borrar.putExtra("user",user);
                 borrar.putExtra("pass",pass);
+                borrar.putExtra("coins",coins);
                 startActivity(borrar);
             }
         });
@@ -103,6 +106,7 @@ public class BorrarCuenta extends AppCompatActivity {
                                             Intent borrar = new Intent (BorrarCuenta.this, BorrarCuenta.class);
                                             borrar.putExtra("user",user);
                                             borrar.putExtra("pass",pass);
+                                            borrar.putExtra("coins",coins);
                                             startActivity(borrar);
                                             progressBar.setVisibility(View.GONE);
                                         }
@@ -120,6 +124,7 @@ public class BorrarCuenta extends AppCompatActivity {
                                 Intent borrar = new Intent (BorrarCuenta.this, BorrarCuenta.class);
                                 borrar.putExtra("user",user);
                                 borrar.putExtra("pass",pass);
+                                borrar.putExtra("coins",coins);
                                 startActivity(borrar);
                             }
                         });
@@ -133,6 +138,7 @@ public class BorrarCuenta extends AppCompatActivity {
                                 Intent borrar = new Intent (BorrarCuenta.this, BorrarCuenta.class);
                                 borrar.putExtra("user",user);
                                 borrar.putExtra("pass",pass);
+                                borrar.putExtra("coins",coins);
                                 startActivity(borrar);
                                 progressBar.setVisibility(View.GONE);
                             }
@@ -149,6 +155,7 @@ public class BorrarCuenta extends AppCompatActivity {
                             Intent borrar = new Intent (BorrarCuenta.this, BorrarCuenta.class);
                             borrar.putExtra("user",user);
                             borrar.putExtra("pass",pass);
+                            borrar.putExtra("coins",coins);
                             startActivity(borrar);
                             progressBar.setVisibility(View.GONE);
                         }

@@ -13,33 +13,21 @@
             android:layout_marginTop="20dp">
 
         <TextView
-                android:layout_width="0dp"
-                android:layout_height="42dp"
+                android:layout_width="234dp"
+                android:layout_height="53dp"
                 android:id="@+id/croackyName"
                 android:text="Croacky Shop"
-                android:textSize="24sp"
+                android:textSize="48sp"
                 android:textColor="@color/lavender"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="40dp"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/nightmarecodehack"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/croackyImage"/>
-        <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/croackyDesc"
-                android:text="Compra aquí apariencias para tu personaje"
-                android:textSize="14sp"
-                android:layout_marginStart="18dp"
-                android:textColor="@color/lavender"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/croackyName"
-                app:layout_constraintEnd_toStartOf="@+id/croackyImage" android:layout_marginTop="4dp"
-                app:layout_constraintHorizontal_bias="0.0"/>
         <ImageView
-                android:layout_width="0dp"
-                android:layout_height="160dp"
+                android:layout_width="114dp"
+                android:layout_height="163dp"
                 android:id="@+id/croackyImage"
                 android:src="@drawable/croacky"
                 app:layout_constraintTop_toTopOf="parent"
@@ -79,6 +67,18 @@
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/ranaImage"/>
 
+                    <TextView
+                            android:layout_width="47dp"
+                            android:layout_height="27dp"
+                            android:id="@+id/ranaPrice"
+                            android:text="0"
+                            android:textSize="20sp"
+                            android:textColor="@color/lavender"
+                            android:layout_marginTop="9dp"
+                            android:layout_alignParentEnd="true" android:layout_marginEnd="33dp"
+                            android:layout_alignParentTop="true" android:layout_toEndOf="@+id/ranaImage"
+                            android:layout_marginStart="1dp" android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="98dp" android:textStyle="bold"/>
                     <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/ranaImage"
                             android:layout_width="70dp"
@@ -100,6 +100,7 @@
                 <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:background="#171A2E">
+
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -110,6 +111,22 @@
                             android:layout_marginTop="10dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/ranadesiertoImage"/>
+                    <TextView
+                            android:layout_width="47dp"
+                            android:layout_height="27dp"
+                            android:id="@+id/desiertoPrice"
+                            android:text="40"
+                            android:textSize="20sp"
+                            android:textColor="@color/lavender"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="1dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="98dp"
+                            android:layout_toEndOf="@+id/ranadesiertoImage"
+                            android:textStyle="bold"/>
                     <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/ranadesiertoImage"
                             android:layout_width="70dp"
@@ -153,6 +170,22 @@
                             android:layout_marginTop="10dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/maskImage"/>
+                    <TextView
+                            android:layout_width="47dp"
+                            android:layout_height="27dp"
+                            android:id="@+id/maskPrice"
+                            android:text="30"
+                            android:textSize="20sp"
+                            android:textColor="@color/lavender"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="5dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="1dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="98dp"
+                            android:layout_toEndOf="@+id/maskImage"
+                            android:textStyle="bold"/>
                     <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/maskImage"
                             android:layout_width="70dp"
@@ -184,13 +217,26 @@
                             android:layout_marginTop="10dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/pinkImage"/>
+                    <TextView
+                            android:layout_width="47dp"
+                            android:layout_height="27dp"
+                            android:id="@+id/pinkPrice"
+                            android:text="60"
+                            android:textSize="20sp"
+                            android:textColor="@color/lavender"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentEnd="true" android:layout_marginEnd="5dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="1dp" android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="98dp" android:layout_toEndOf="@+id/pinkImage"
+                            android:textStyle="bold"/>
                     <pl.droidsonroids.gif.GifImageView
-                        android:id="@+id/pinkImage"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/pinkmanidle"
+                            android:id="@+id/pinkImage"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/pinkmanidle"
                     />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -227,6 +273,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/virtual1Image"/>
+
                     <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/virtual1Image"
                             android:layout_width="70dp"
@@ -300,6 +347,19 @@
                             android:layout_marginTop="10dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/virtualImage"/>
+                    <TextView
+                            android:layout_width="47dp"
+                            android:layout_height="27dp"
+                            android:id="@+id/virtualPrice"
+                            android:text="50"
+                            android:textSize="20sp"
+                            android:textColor="@color/lavender"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentEnd="true" android:layout_marginEnd="5dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="1dp" android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="98dp" android:layout_toEndOf="@+id/virtualImage"
+                            android:textStyle="bold"/>
                     <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/virtualImage"
                             android:layout_width="70dp"
@@ -331,6 +391,19 @@
                             android:layout_marginTop="10dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/scientistImage"/>
+                    <TextView
+                            android:layout_width="47dp"
+                            android:layout_height="27dp"
+                            android:id="@+id/scientistPrice"
+                            android:text="50"
+                            android:textSize="20sp"
+                            android:textColor="@color/lavender"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentEnd="true" android:layout_marginEnd="5dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="1dp" android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="98dp" android:layout_toEndOf="@+id/scientistImage"
+                            android:textStyle="bold"/>
                     <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/scientistImage"
                             android:layout_width="70dp"
@@ -346,16 +419,16 @@
                 android:layout_width="65dp"
                 android:layout_height="43dp" app:srcCompat="@drawable/frutas" android:id="@+id/frutasImage"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="124dp" android:layout_marginEnd="196dp"/>
+                android:layout_marginTop="128dp" android:layout_marginEnd="156dp"/>
         <TextView
-                android:text="Tus frutas: 00"
+                android:text="Tus croCoins: 00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/saldoText"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="132dp" android:layout_marginStart="16dp" android:textSize="20sp"
-                android:textColor="#8079DF" app:layout_constraintEnd_toStartOf="@+id/frutasImage"
+                android:textColor="@color/lavender" app:layout_constraintEnd_toStartOf="@+id/frutasImage"
                 app:layout_constraintBottom_toTopOf="@+id/row1" app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="0.111"/>
+                app:layout_constraintVertical_bias="0.0" android:textStyle="bold"/>
         <ImageButton
                 android:id="@+id/volver4"
                 android:layout_width="48dp"
@@ -368,12 +441,15 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_revert" android:layout_marginTop="4dp"/>
         <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/notif2"
+                android:text=" "
+                android:layout_width="256dp"
+                android:layout_height="29dp" android:id="@+id/notif2"
                 tools:visibility="invisible" android:textColor="@color/lavender"
-                android:textColorHint="@color/lavender" app:layout_constraintBottom_toTopOf="@+id/croackyName"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/volver4"
-                app:layout_constraintEnd_toStartOf="@+id/croackyImage"/>
+                android:textColorHint="@color/lavender"
+                app:layout_constraintTop_toBottomOf="@+id/croackyName"
+                android:layout_marginTop="8dp" app:layout_constraintEnd_toStartOf="@+id/croackyImage"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toTopOf="@+id/saldoText"
+                app:layout_constraintVertical_bias="0.0"
+                android:textSize="20sp" app:layout_constraintHorizontal_bias="0.375"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

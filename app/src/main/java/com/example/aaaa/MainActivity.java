@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         boolean isAuthenticated = sharedPreferences.getBoolean("is_authenticated", false);
         String pass = sharedPreferences.getString("pass","");
         String user = sharedPreferences.getString("user","");
+        Integer coins = sharedPreferences.getInt("coins",0);
 
 
         if (isAuthenticated) {
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("user",user);
                     home.putExtra("user",user);
                     home.putExtra("pass",pass);
+                    home.putExtra("coins",coins);
                     startActivity(home);
                 }
             }, 2000);

@@ -34,7 +34,7 @@ public class LogIn extends AppCompatActivity {
     private static final String KEY_NOMBRE = "";
     String user;
     String UserPassword;
-
+    Integer coins;
 
     private ProgressBar progressBar;
 
@@ -44,8 +44,8 @@ public class LogIn extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("is_authenticated", isAuthenticated);
         editor.putString("user",user);
-        Log.d("userpass",UserPassword);
         editor.putString("pass",UserPassword);
+        editor.putInt("coins",coins);
         editor.apply();
     }
     @Override
@@ -94,9 +94,12 @@ public class LogIn extends AppCompatActivity {
                             TextView success = (TextView) findViewById(R.id.notif);
                             success.setText("Te has logeado correctamente");
                             success.setVisibility(View.VISIBLE);
+                            coins = 200;
                             saveAuthenticationState(true);
+
                             home.putExtra("user",user);
                             home.putExtra("pass",UserPassword);
+                            home.putExtra("coins",coins);
 
                             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                 @Override

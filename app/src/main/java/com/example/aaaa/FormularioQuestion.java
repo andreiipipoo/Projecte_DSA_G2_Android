@@ -47,13 +47,16 @@ public class FormularioQuestion extends AppCompatActivity {
     private TextView notif;
     String usercreds;
     String passcreds;
+    Integer coins;
     private void getCredenciales(){
         usercreds = getIntent().getExtras().getString("user");
         passcreds = getIntent().getExtras().getString("pass");
+        coins = getIntent().getExtras().getInt("coins");
     }
     private void setCredenciales(Intent i){
         i.putExtra("user",usercreds);
         i.putExtra("pass",passcreds);
+        i.putExtra("coins",coins);
         startActivity(i);
     }
     @Override
