@@ -210,13 +210,11 @@ public class NewHome extends AppCompatActivity {
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
                 Intent perfil = new Intent (NewHome.this, Perfil.class);
-                startActivity(perfil);
+                setCredenciales(perfil);
             }
         });
-
         //HECHO
         tiendaCard = findViewById(R.id.tiendaCard);
-
         tiendaCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -225,33 +223,26 @@ public class NewHome extends AppCompatActivity {
                 setCredenciales(i);
             }
         });
-
         //HECHO
         pinkCard = findViewById(R.id.pinkCard);
-
         pinkCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
                 Intent i = new Intent (NewHome.this, Denuncia.class);
                 setCredenciales(i);
-
             }
         });
-
         //HECHO
         virtualCard = findViewById(R.id.virtualCard);
-
         virtualCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
                 Intent w = new Intent (NewHome.this, FormularioQuestion.class);
                 setCredenciales(w);
-
             }
         });
-
         //HECHO
         scientistCard = findViewById(R.id.scientistCard);
 

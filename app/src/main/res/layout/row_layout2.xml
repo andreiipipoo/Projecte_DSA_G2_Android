@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#050000">
 
     <TextView
         android:id="@+id/nombreUsuario2"
@@ -11,6 +12,7 @@
         android:layout_height="43dp"
         android:text="Nombre del jugador"
         android:textAlignment="center"
+        android:textColor="@color/lavender"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

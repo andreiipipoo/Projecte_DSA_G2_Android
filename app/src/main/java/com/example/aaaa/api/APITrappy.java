@@ -10,8 +10,8 @@ import retrofit2.http.*;
 
 public interface APITrappy {
 
-        @POST("player/{username}")
-        Call<Usuario> recibirInsignia(@Path ("username") String username);
+        @GET("minims/badgesList/{username}")
+        Call<Insignia> recibirInsignia(@Path ("username") String username);
 
 
         @POST("player/login")
@@ -43,5 +43,10 @@ public interface APITrappy {
         Call<List<Message>> getMessages();
         @DELETE("player/delete/{username}")
         Call<Void> delete(@Path ("username") String username);
+
+        @GET("player/{username}")
+        Call<Usuario> recibirPErfil(@Path ("username") String username);
+
+
 }
 
