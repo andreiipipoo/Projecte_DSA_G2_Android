@@ -92,7 +92,6 @@ public class Perfil extends AppCompatActivity {
         Timer timer = new Timer();
 
 
-
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager2);
 
@@ -104,15 +103,28 @@ public class Perfil extends AppCompatActivity {
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent volver = new Intent(Perfil.this, NewHome.class);
-            setCredenciales(volver);
+                Intent volver = new Intent(Perfil.this, NewHome.class);
+                setCredenciales(volver);
             }
         });
 
+
         recibirInsignias = (Button) findViewById(R.id.buttonInsignia);
         recibirInsignias.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
+                usernameView.setVisibility(View.GONE);
+                idView.setVisibility(View.GONE);
+                tlfView.setVisibility(View.GONE);
+                croCoinsView.setVisibility(View.GONE);
+                emailView.setVisibility(View.GONE);
+
+                recyclerView.setVisibility(View.VISIBLE);
+                adapter.setInsignias(Insignia.getData());
+
+
+                /*
                 TextInputEditText username2 = (TextInputEditText) findViewById(R.id.idUsuario2);
                 username1 = username2.getText().toString();
                 Log.d("Valor id introducido: ", String.valueOf(username1));
@@ -153,14 +165,20 @@ public class Perfil extends AppCompatActivity {
                         Log.d("Mensaje error Register","Ha habido un error, y ni siquiera he entrado en onResponse");
                     }
                 });
+                */
+
             }
+
+
         });
+
 
         enviar = (Button) findViewById(R.id.enviarBtn);
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                recyclerView.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
 
                 ejemploInsignias.clear();
@@ -170,14 +188,13 @@ public class Perfil extends AppCompatActivity {
                 Log.d("Valor id introducido: ", String.valueOf(username1));
 
 
-
                 //MINIMO 2
                 apiTrappy.recibirPErfil(username1).enqueue(new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                         Log.d("Código de Register: ", String.valueOf(response.code()));
 
-                        if(response.code()==201){
+                        if (response.code() == 201) {
                             usernameView.setVisibility(View.VISIBLE);
                             idView.setVisibility(View.VISIBLE);
                             tlfView.setVisibility(View.VISIBLE);
@@ -199,15 +216,14 @@ public class Perfil extends AppCompatActivity {
                             email = usuario.getMail();
                             croCoins = usuario.getCroCoins();
 
-                            idView.setText("ID: " +id);
+                            idView.setText("ID: " + id);
                             usernameView.setText("Username: " + username);
                             tlfView.setText("Telephone: " + telephone);
                             emailView.setText("Email: " + email);
                             croCoinsView.setText("CroCoins: " + String.valueOf(croCoins));
                             progressBar.setVisibility(View.GONE);
 
-                        }
-                        else if (response.code() == 404) {
+                        } else if (response.code() == 404) {
 
                             timer.schedule(new TimerTask() {
                                 public void run() {
@@ -265,6 +281,7 @@ public class Perfil extends AppCompatActivity {
 
 
                     }
+
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable t) {
                         String msg = "Error in retrofit: " + t.toString();
@@ -276,6 +293,8 @@ public class Perfil extends AppCompatActivity {
                 });
 
             }
+
+
         });
         //GET /user/xxxxxx/badges/
         //==>
@@ -291,7 +310,5 @@ public class Perfil extends AppCompatActivity {
         //]
 
 
-
     }
-
 }
