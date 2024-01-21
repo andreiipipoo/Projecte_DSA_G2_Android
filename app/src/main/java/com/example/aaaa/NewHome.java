@@ -40,6 +40,7 @@ public class NewHome extends AppCompatActivity {
     List<Message> mensajes = new ArrayList<>();
     String usercreds;
     String passcreds;
+    Button verMensajes;
     private void getCredenciales(){
         usercreds = getIntent().getExtras().getString("user");
         passcreds = getIntent().getExtras().getString("pass");
@@ -76,6 +77,18 @@ public class NewHome extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
         apiTrappy = Client.getInstance().getApiTrappy();
        getCredenciales();
+
+        verMensajes = findViewById(R.id.buttonMsg);
+
+        verMensajes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                Intent w = new Intent (NewHome.this, Mensajes.class);
+                setCredenciales(w);
+
+            }
+        });
 
         /*
         mensaje = (TextView) findViewById(R.id.message);

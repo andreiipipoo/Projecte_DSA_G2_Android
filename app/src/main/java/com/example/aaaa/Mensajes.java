@@ -62,6 +62,7 @@ public class Mensajes extends AppCompatActivity {
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 if (response.isSuccessful()) {
                     mensajes = response.body();
+                    Log.d("Mensajes",mensajes.toString());
                 } else {
                     Log.d("ERROR MENSAJE", "HA HABIDO UN ERROR RECIBIENDO LOS MENSAJES");
                 }
@@ -72,6 +73,7 @@ public class Mensajes extends AppCompatActivity {
                 Log.d("ERROR MENSAJE", "HA HABIDO UN ERROR RECIBIENDO LOS MENSAJES");
             }
         });
+
 
         if(!mensajes.isEmpty()){
             adapter.setItems(mensajes);

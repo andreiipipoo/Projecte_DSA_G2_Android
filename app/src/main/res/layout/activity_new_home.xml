@@ -298,13 +298,18 @@
                 app:layout_constraintStart_toEndOf="@+id/progressBar5"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/croacky" app:layout_constraintHorizontal_bias="0.481"/>
+
         <Button
-                android:text="Button"
-                android:layout_width="108dp"
-                android:layout_height="37dp" android:id="@+id/buttonMsg"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/row1" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="0.819" app:layout_constraintVertical_bias="0.928"
-                android:backgroundTint="@color/lavender"/>
+            android:id="@+id/buttonMsg"
+            android:layout_width="153dp"
+            android:layout_height="39dp"
+            android:backgroundTint="@color/lavender"
+            android:text="Ver mensajes"
+            app:layout_constraintBottom_toTopOf="@+id/row1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.937"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.954" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
