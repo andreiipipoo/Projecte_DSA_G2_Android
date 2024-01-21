@@ -38,10 +38,23 @@ public class NewHome extends AppCompatActivity {
     int i;
     String mensajeMostrado = "";
     List<Message> mensajes = new ArrayList<>();
+    String usercreds;
+    String passcreds;
+    private void getCredenciales(){
+        usercreds = getIntent().getExtras().getString("user");
+        passcreds = getIntent().getExtras().getString("pass");
+    }
+    private void setCredenciales(Intent i){
+        i.putExtra("user",usercreds);
+        i.putExtra("pass",passcreds);
+        startActivity(i);
+    }
     private void clearAuthenticationInfo() {
         SharedPreferences sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.remove("is_authenticated");
+        editor.remove("user");
+        editor.remove("pass");
         editor.apply();
     }
     @Override
@@ -62,6 +75,7 @@ public class NewHome extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar5);
         progressBar.setVisibility(View.GONE);
         apiTrappy = Client.getInstance().getApiTrappy();
+       getCredenciales();
 
         /*
         mensaje = (TextView) findViewById(R.id.message);
@@ -195,7 +209,7 @@ public class NewHome extends AppCompatActivity {
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
                 Intent i = new Intent (NewHome.this, ShopDashboard.class);
-                startActivity(i);
+                setCredenciales(i);
             }
         });
 
@@ -207,7 +221,7 @@ public class NewHome extends AppCompatActivity {
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
                 Intent i = new Intent (NewHome.this, Denuncia.class);
-                startActivity(i);
+                setCredenciales(i);
 
             }
         });
@@ -220,7 +234,7 @@ public class NewHome extends AppCompatActivity {
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
                 Intent w = new Intent (NewHome.this, FormularioQuestion.class);
-                startActivity(w);
+                setCredenciales(w);
 
             }
         });
@@ -232,8 +246,8 @@ public class NewHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                Intent perfil = new Intent (NewHome.this, BorrarCuenta.class);
-                startActivity(perfil);
+                Intent borrar = new Intent (NewHome.this, BorrarCuenta.class);
+                setCredenciales(borrar);
             }
         });
     }

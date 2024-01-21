@@ -1,6 +1,7 @@
 package com.example.aaaa;
 
 import android.content.Intent;
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
@@ -15,15 +16,22 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         boolean isAuthenticated = sharedPreferences.getBoolean("is_authenticated", false);
+        String pass = sharedPreferences.getString("pass","");
+        String user = sharedPreferences.getString("user","");
+
 
         if (isAuthenticated) {
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 public void run() {
-                    Intent i = new Intent(MainActivity.this, NewHome.class);
-                    startActivity(i);
+                    Intent home = new Intent (MainActivity.this, NewHome.class);
+                    Log.d("pass1",pass);
+                    Log.d("user",user);
+                    home.putExtra("user",user);
+                    home.putExtra("pass",pass);
+                    startActivity(home);
                 }
-            }, 3000);
+            }, 2000);
             // Si el usuario está autenticado, redirigir a la actividad principal
 
         } else {
@@ -34,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = new Intent(MainActivity.this, LogIn.class);
                     startActivity(i);
                 }
-            }, 3000);
+            }, 2000);
         }
     }
     @Override

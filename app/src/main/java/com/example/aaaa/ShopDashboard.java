@@ -1,6 +1,8 @@
 package com.example.aaaa;
 
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -33,23 +35,34 @@ public class ShopDashboard extends AppCompatActivity {
     CardView scientistCard;
     ImageButton volver3;
     APITrappy apiTrappy;
+    String usercreds;
+    String passcreds;
+    private void getCredenciales(){
+        usercreds = getIntent().getExtras().getString("user");
+        passcreds = getIntent().getExtras().getString("pass");
+    }
+    private void setCredenciales(Intent i){
+        i.putExtra("user",usercreds);
+        i.putExtra("pass",passcreds);
+        startActivity(i);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_dashboard);
         apiTrappy = Client.getInstance().getApiTrappy();
+        getCredenciales();
 
         volver3 = findViewById(R.id.volver4);
-        SharedPreferences sharedPreferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", "");
+
 
         Timer timer = new Timer();
         volver3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent (ShopDashboard.this, NewHome.class);
-                startActivity(i);
+                setCredenciales(i);
             }
         });
 
@@ -58,40 +71,80 @@ public class ShopDashboard extends AppCompatActivity {
         ranaCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usernameplayer = username;
                 String iditem = "1";
 
                 Log.d("Nombre item: botas","");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",usernameplayer);
+                Log.d("Id player: id ",usercreds);
 
 
-                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
+
+                apiTrappy.buy(iditem,usercreds).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
                         //Aquí van los diferentes códigos que recibimos (compra completada con éxito o no)
                         if (response.code()==201) {
 
-                            timer.schedule(new TimerTask() {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
                                     success.setText("Compra realizada con éxito.");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
-                        } else if (response.code() == 404) {
-                            timer.schedule(new TimerTask() {
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 402) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
-                                    success.setText("No se ha podido realizar la compra.");
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No dispones de crocoins suficientes");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 404) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 405) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 409) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("Ya tienes este item");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
                         }
                     }
                     @Override
@@ -100,11 +153,9 @@ public class ShopDashboard extends AppCompatActivity {
                         Log.d("Mensaje error Register", msg);
                         Toast.makeText(getApplicationContext(), "msg", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                        startActivity(i);
+                        setCredenciales(i);
                     }
                 });
-
-
             }
         });
 
@@ -113,39 +164,79 @@ public class ShopDashboard extends AppCompatActivity {
         desiertoCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usernameplayer = username;                String iditem = "2";
+                String iditem = "2";
 
                 Log.d("Nombre item:","espada");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",usernameplayer);
+                Log.d("Id player: id ",usercreds);
 
 
-                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usercreds).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
                         //Aquí van los diferentes códigos que recibimos (compra completada con éxito o no)
                         if (response.code()==201) {
 
-                            timer.schedule(new TimerTask() {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
                                     success.setText("Compra realizada con éxito.");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
-                        } else if (response.code() == 404) {
-                            timer.schedule(new TimerTask() {
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 402) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
-                                    success.setText("No se ha podido realizar la compra.");
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No dispones de crocoins suficientes");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 404) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 405) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 409) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("Ya tienes este item");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
                         }
                     }
                     @Override
@@ -154,10 +245,9 @@ public class ShopDashboard extends AppCompatActivity {
                         Log.d("Mensaje error Register", msg);
                         Toast.makeText(getApplicationContext(), "msg", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                        startActivity(i);
+                        setCredenciales(i);
                     }
                 });
-
             }
         });
 
@@ -166,40 +256,80 @@ public class ShopDashboard extends AppCompatActivity {
         maskCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usernameplayer = "ejemplo";
+
                 String iditem = "3";
 
                 Log.d("Nombre item: pocion","");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",usernameplayer);
+                Log.d("Id player: id ",usercreds);
 
 
-                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usercreds).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
                         //Aquí van los diferentes códigos que recibimos (compra completada con éxito o no)
                         if (response.code()==201) {
 
-                            timer.schedule(new TimerTask() {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
                                     success.setText("Compra realizada con éxito.");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
-                        } else if (response.code() == 404) {
-                            timer.schedule(new TimerTask() {
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 402) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
-                                    success.setText("No se ha podido realizar la compra.");
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No dispones de crocoins suficientes");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 404) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 405) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 409) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("Ya tienes este item");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
                         }
                     }
                     @Override
@@ -208,10 +338,9 @@ public class ShopDashboard extends AppCompatActivity {
                         Log.d("Mensaje error Register", msg);
                         Toast.makeText(getApplicationContext(), "msg", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                        startActivity(i);
+                        setCredenciales(i);
                     }
                 });
-
             }
         });
 
@@ -220,40 +349,79 @@ public class ShopDashboard extends AppCompatActivity {
         pinkCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usernameplayer = "ejemplo";
                 String iditem = "4";
 
                 Log.d("Nombre item: baya","");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",usernameplayer);
+                Log.d("Id player: id ",usercreds);
 
 
-                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usercreds).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
                         //Aquí van los diferentes códigos que recibimos (compra completada con éxito o no)
                         if (response.code()==201) {
 
-                            timer.schedule(new TimerTask() {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
                                     success.setText("Compra realizada con éxito.");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
-                        } else if (response.code() == 404) {
-                            timer.schedule(new TimerTask() {
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 402) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
-                                    success.setText("No se ha podido realizar la compra.");
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No dispones de crocoins suficientes");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 404) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 405) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 409) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("Ya tienes este item");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
                         }
                     }
                     @Override
@@ -262,10 +430,9 @@ public class ShopDashboard extends AppCompatActivity {
                         Log.d("Mensaje error Register", msg);
                         Toast.makeText(getApplicationContext(), "msg", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                        startActivity(i);
+                        setCredenciales(i);
                     }
                 });
-
             }
         });
 
@@ -274,40 +441,79 @@ public class ShopDashboard extends AppCompatActivity {
         virtualCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usernameplayer = "ejemplo";
                 String iditem = "5";
 
                 Log.d("Nombre item: magnesio","");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",usernameplayer);
+                Log.d("Id player: id ",usercreds);
 
 
-                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usercreds).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
                         //Aquí van los diferentes códigos que recibimos (compra completada con éxito o no)
                         if (response.code()==201) {
 
-                            timer.schedule(new TimerTask() {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
                                     success.setText("Compra realizada con éxito.");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
-                        } else if (response.code() == 404) {
-                            timer.schedule(new TimerTask() {
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 402) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
-                                    success.setText("No se ha podido realizar la compra.");
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No dispones de crocoins suficientes");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 404) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 405) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 409) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("Ya tienes este item");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
                         }
                     }
                     @Override
@@ -316,10 +522,9 @@ public class ShopDashboard extends AppCompatActivity {
                         Log.d("Mensaje error Register", msg);
                         Toast.makeText(getApplicationContext(), "msg", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                        startActivity(i);
+                        setCredenciales(i);
                     }
                 });
-
             }
         });
 
@@ -328,40 +533,79 @@ public class ShopDashboard extends AppCompatActivity {
         scientistCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usernameplayer = "ejemplo";
                 String iditem = "6";
 
                 Log.d("Nombre item: escudo","");
                 Log.d("Id item: id ",iditem);
-                Log.d("Id player: id ",usernameplayer);
+                Log.d("Id player: id ",usercreds);
 
 
-                apiTrappy.buy(iditem,usernameplayer).enqueue(new Callback<Void>() {
+                apiTrappy.buy(iditem,usercreds).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response){
                         Log.d("Código de compra: ", String.valueOf(response));
                         //Aquí van los diferentes códigos que recibimos (compra completada con éxito o no)
                         if (response.code()==201) {
 
-                            timer.schedule(new TimerTask() {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
                                     success.setText("Compra realizada con éxito.");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
-                        } else if (response.code() == 404) {
-                            timer.schedule(new TimerTask() {
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 402) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
                                 public void run() {
-                                    TextView success = (TextView) findViewById(R.id.Notifi);
-                                    success.setText("No se ha podido realizar la compra.");
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No dispones de crocoins suficientes");
                                     success.setVisibility(View.VISIBLE);
                                     Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                 }
-                            }, 2000);
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 404) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 405) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("No se ha podido realizar la compra");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
+                        } else if (response.code() == 409) {
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Tu código de actualización de la interfaz de usuario va aquí
+                                    TextView success = (TextView) findViewById(R.id.notif2);
+                                    success.setText("Ya tienes este item");
+                                    success.setVisibility(View.VISIBLE);
+                                    Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
+                                    setCredenciales(i);
+                                }
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
                         }
                     }
                     @Override
@@ -370,13 +614,10 @@ public class ShopDashboard extends AppCompatActivity {
                         Log.d("Mensaje error Register", msg);
                         Toast.makeText(getApplicationContext(), "msg", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ShopDashboard.this, ShopDashboard.class);
-                        startActivity(i);
+                        setCredenciales(i);
                     }
                 });
-
             }
         });
-
-
     }
 }

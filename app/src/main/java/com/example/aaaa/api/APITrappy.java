@@ -6,11 +6,7 @@ import com.example.aaaa.models.*;
 import com.example.aaaa.models.Usuario;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
+import retrofit2.http.*;
 
 public interface APITrappy {
 
@@ -32,7 +28,7 @@ public interface APITrappy {
         Call<Void> register(@Body Usuario register);
 
 
-        @POST("trappy/buyItem/{idItem}/{usernamePlayer}")
+        @PUT("item/buyItem/{idItem}/{usernamePlayer}")
         Call<Void> buy(@Path ("idItem") String idItem, @Path ("usernamePlayer") String usernamePlayer);
 
         @GET("items/shop")
@@ -45,7 +41,7 @@ public interface APITrappy {
         Call<Void> postQuestion(@Body Question question);
         @GET("minims/getMessages")
         Call<List<Message>> getMessages();
-        @POST("player/delete/{username}")
+        @DELETE("player/delete/{username}")
         Call<Void> delete(@Path ("username") String username);
 }
 

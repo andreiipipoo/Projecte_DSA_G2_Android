@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import java.text.BreakIterator;
-
 public class Home extends AppCompatActivity {
     Button shop;
     Button shopDash1;
@@ -65,7 +63,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                Intent i = new Intent (Home.this, Shop.class);
+                Intent i = new Intent (Home.this, Mensajes.class);
                 startActivity(i);
             }
         });

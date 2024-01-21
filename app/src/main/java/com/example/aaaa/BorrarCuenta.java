@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aaaa.api.APITrappy;
+import com.example.aaaa.api.Client;
 import com.example.aaaa.models.LoginModel;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -32,36 +33,51 @@ public class BorrarCuenta extends AppCompatActivity {
     Button enviar;
     private ProgressBar progressBar;
     APITrappy apiTrappy;
+    String user;
+    String pass;
+    Button volver3;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil);
-
+        setContentView(R.layout.activity_borrarcuenta);
+        user = getIntent().getExtras().getString("user");
+        pass = getIntent().getExtras().getString("pass");
+        apiTrappy = Client.getInstance().getApiTrappy();
+        TextView notificacion = findViewById(R.id.notifBorrar);
         contraseña = (EditText) findViewById(R.id.password3);
-
-        contraseña2 = contraseña.getText().toString();
-
-        SharedPreferences sharedPreferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        String password = sharedPreferences.getString("contraseña", "");
-        String username = sharedPreferences.getString("username", "");
+        volver3 = (Button) findViewById(R.id.button);
 
         enviar = (Button) findViewById(R.id.buttonEnviar1);
         progressBar = findViewById(R.id.progressBar7);
-
-        if(!password.isEmpty() && !username.isEmpty()){
-            progressBar.setVisibility(View.VISIBLE);
-            if(password.equals(contraseña2)){
-                enviar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        progressBar.setVisibility(View.VISIBLE);
-                        apiTrappy.delete(username).enqueue(new Callback<Void>(){
+        volver3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent borrar = new Intent (BorrarCuenta.this, NewHome.class);
+                borrar.putExtra("user",user);
+                borrar.putExtra("pass",pass);
+                startActivity(borrar);
+            }
+        });
+        enviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                contraseña2 = contraseña.getText().toString();
+                Log.d("user",user);
+                Log.d("pass",pass);
+                Log.d("pass2",contraseña2);
+                if(!pass.isEmpty() && !user.isEmpty()&& !contraseña2.isEmpty()){
+                    progressBar.setVisibility(View.VISIBLE);
+                    if(pass.equals(contraseña2)){
+                        apiTrappy.delete(user).enqueue(new Callback<Void>(){
                             String code;
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 code = String.valueOf(response.code());
                                 Log.d("Code", ""+response.code());
                                 if(code.equals("201")){
-                                    TextView notificacion = findViewById(R.id.notifBorrar);
+                                    Log.d("code: ","codigo 201");
+                                    notificacion.setText("La cuenta se ha borrado correctamente");
                                     notificacion.setVisibility(View.VISIBLE);
                                     new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                         @Override
@@ -75,16 +91,19 @@ public class BorrarCuenta extends AppCompatActivity {
 
                                 }
                                 else if (code.equals("404")){
-                                    TextView success = (TextView) findViewById(R.id.notif);
-                                    success.setText("No se ha encontrado ese nombre de usuario");
-                                    success.setVisibility(View.VISIBLE);
+                                    Log.d("code: ","codigo 404");
+
+                                    notificacion.setText("No se ha encontrado el nombre de usuario");
+                                    notificacion.setVisibility(View.VISIBLE);
 
                                     new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
                                             // Tu código de actualización de la interfaz de usuario va aquí
-                                            Intent home1 = new Intent (BorrarCuenta.this, BorrarCuenta.class);
-                                            startActivity(home1);
+                                            Intent borrar = new Intent (BorrarCuenta.this, BorrarCuenta.class);
+                                            borrar.putExtra("user",user);
+                                            borrar.putExtra("pass",pass);
+                                            startActivity(borrar);
                                             progressBar.setVisibility(View.GONE);
                                         }
                                     }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
@@ -98,15 +117,47 @@ public class BorrarCuenta extends AppCompatActivity {
                                 Log.d("Code",msg);
                                 Toast.makeText(getApplicationContext(),"msg", Toast.LENGTH_SHORT).show();
                                 /*progressBar.setVisibility(View.GONE);*/
-                                Intent home1 = new Intent (BorrarCuenta.this, BorrarCuenta.class);
-                                startActivity(home1);
+                                Intent borrar = new Intent (BorrarCuenta.this, BorrarCuenta.class);
+                                borrar.putExtra("user",user);
+                                borrar.putExtra("pass",pass);
+                                startActivity(borrar);
                             }
                         });
-                        Log.d("Code", "end login");
+                    }else{
+                        notificacion.setText("La contraseña no es correcta");
+                        notificacion.setVisibility(View.VISIBLE);
+                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Tu código de actualización de la interfaz de usuario va aquí
+                                Intent borrar = new Intent (BorrarCuenta.this, BorrarCuenta.class);
+                                borrar.putExtra("user",user);
+                                borrar.putExtra("pass",pass);
+                                startActivity(borrar);
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
                     }
-                });
+
+                }else{
+                    notificacion.setText("Por favor escribe una contraseña válida");
+                    notificacion.setVisibility(View.VISIBLE);
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Tu código de actualización de la interfaz de usuario va aquí
+                            Intent borrar = new Intent (BorrarCuenta.this, BorrarCuenta.class);
+                            borrar.putExtra("user",user);
+                            borrar.putExtra("pass",pass);
+                            startActivity(borrar);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
+                }
+
+                Log.d("Code", "end login");
             }
-        }
+        });
 
     }
 }

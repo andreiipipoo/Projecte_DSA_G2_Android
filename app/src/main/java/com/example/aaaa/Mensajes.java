@@ -16,20 +16,25 @@ import com.example.aaaa.api.APITrappy;
 import com.example.aaaa.api.Client;
 import com.example.aaaa.models.Item;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.example.aaaa.models.Message;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Shop extends AppCompatActivity {
+public class Mensajes extends AppCompatActivity {
     ImageButton volver2;
     APITrappy apiTrappy;
+    List<Message> mensajes = new ArrayList<>();
+    TextView mensaje;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop);
+        setContentView(R.layout.activity_mensajes);
         apiTrappy = Client.getInstance().getApiTrappy();
         volver2 = findViewById(R.id.volver4);
 
@@ -37,7 +42,7 @@ public class Shop extends AppCompatActivity {
         volver2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent (Shop.this, Home.class);
+                Intent i = new Intent (Mensajes.this, Home.class);
                 startActivity(i);
             }
         });
@@ -49,7 +54,33 @@ public class Shop extends AppCompatActivity {
 
         MyAdapter adapter = new MyAdapter();
         recyclerView.setAdapter(adapter);
-        adapter.setItems(Item.getData());
+        mensaje = (TextView) findViewById(R.id.firstLine);
+        apiTrappy = com.example.aaaa.api.Client.getInstance().getApiTrappy();
+        //Recogemos los datos que nos mandan desde la función getMessage() del backend (una lista de mensajes)
+        apiTrappy.getMessages().enqueue(new Callback<List<Message>>() {
+            @Override
+            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                if (response.isSuccessful()) {
+                    mensajes = response.body();
+                } else {
+                    Log.d("ERROR MENSAJE", "HA HABIDO UN ERROR RECIBIENDO LOS MENSAJES");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Message>> call, Throwable t) {
+                Log.d("ERROR MENSAJE", "HA HABIDO UN ERROR RECIBIENDO LOS MENSAJES");
+            }
+        });
+
+        if(!mensajes.isEmpty()){
+            adapter.setItems(mensajes);
+            Log.d("Mensajes:","Se muestran los mensajes");
+        }
+        else{
+            Log.d("Mensajes:","Ha habido un error mostrando los mensajes.");
+        }
+        /*
         adapter.setOnItemClickListener(new MyAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(Item item) {
@@ -81,7 +112,7 @@ public class Shop extends AppCompatActivity {
                                     TextView success = (TextView) findViewById(R.id.Notifi);
                                     success.setText("Compra realizada con éxito.");
                                     success.setVisibility(View.VISIBLE);
-                                    Intent i = new Intent(Shop.this, Shop.class);
+                                    Intent i = new Intent(Mensajes.this, Mensajes.class);
                                     startActivity(i);
                                 }
                             }, 2000);
@@ -91,7 +122,7 @@ public class Shop extends AppCompatActivity {
                                     TextView success = (TextView) findViewById(R.id.Notifi);
                                     success.setText("No se ha podido realizar la compra.");
                                     success.setVisibility(View.VISIBLE);
-                                    Intent i = new Intent(Shop.this, Shop.class);
+                                    Intent i = new Intent(Mensajes.this, Mensajes.class);
                                     startActivity(i);
                                 }
                             }, 2000);
@@ -102,11 +133,13 @@ public class Shop extends AppCompatActivity {
                         String msg = "Error in retrofit: " + t.toString();
                         Log.d("Mensaje error Register", msg);
                         Toast.makeText(getApplicationContext(), "msg", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(Shop.this, Shop.class);
+                        Intent i = new Intent(Mensajes.this, Mensajes.class);
                         startActivity(i);
                     }
                 });
             }
         });
+
+         */
     }
 }

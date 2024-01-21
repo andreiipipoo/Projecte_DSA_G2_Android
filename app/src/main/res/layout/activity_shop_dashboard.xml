@@ -353,7 +353,9 @@
                 android:layout_height="wrap_content" android:id="@+id/saldoText"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="132dp" android:layout_marginStart="16dp" android:textSize="20sp"
-                android:textColor="#8079DF"/>
+                android:textColor="#8079DF" app:layout_constraintEnd_toStartOf="@+id/frutasImage"
+                app:layout_constraintBottom_toTopOf="@+id/row1" app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintVertical_bias="0.111"/>
         <ImageButton
                 android:id="@+id/volver4"
                 android:layout_width="48dp"
@@ -365,5 +367,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_revert" android:layout_marginTop="4dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/notif2"
+                tools:visibility="invisible" android:textColor="@color/lavender"
+                android:textColorHint="@color/lavender" app:layout_constraintBottom_toTopOf="@+id/croackyName"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/volver4"
+                app:layout_constraintEnd_toStartOf="@+id/croackyImage"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

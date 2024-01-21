@@ -43,6 +43,9 @@ public class LogIn extends AppCompatActivity {
         sharedPref = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("is_authenticated", isAuthenticated);
+        editor.putString("user",user);
+        Log.d("userpass",UserPassword);
+        editor.putString("pass",UserPassword);
         editor.apply();
     }
     @Override
@@ -90,10 +93,10 @@ public class LogIn extends AppCompatActivity {
                         if(code.equals("200")){
                             TextView success = (TextView) findViewById(R.id.notif);
                             success.setText("Te has logeado correctamente");
-                            editor.putString("username", user);
-                            editor.putString("password", UserPassword);
                             success.setVisibility(View.VISIBLE);
                             saveAuthenticationState(true);
+                            home.putExtra("user",user);
+                            home.putExtra("pass",UserPassword);
 
                             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                 @Override
@@ -102,7 +105,7 @@ public class LogIn extends AppCompatActivity {
                                     startActivity(home);
                                     progressBar.setVisibility(View.GONE);
                                 }
-                            }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
+                            }, 1500);  // El retraso en milisegundos antes de que se ejecute tu código
                             /*
                             timer.schedule(new TimerTask() {
                                 public void run() {
@@ -125,7 +128,7 @@ public class LogIn extends AppCompatActivity {
                                     /*progressBar.setVisibility(View.GONE);*/
                                     startActivity(l);
                                 }
-                            }, 2000);
+                            }, 1500);
                         }
                         else if (code.equals("405")){
                             TextView success = (TextView) findViewById(R.id.notif);
@@ -137,7 +140,7 @@ public class LogIn extends AppCompatActivity {
                                     /*progressBar.setVisibility(View.GONE);*/
                                     startActivity(l);
                                 }
-                            }, 2000);
+                            }, 1500);
                         }
                         else if (code.equals("500")){
                             TextView success = (TextView) findViewById(R.id.notif);
@@ -149,7 +152,7 @@ public class LogIn extends AppCompatActivity {
                                     /*progressBar.setVisibility(View.GONE);*/
                                     startActivity(l);
                                 }
-                            }, 2000);
+                            }, 1500);
                         }
                     }
                     @Override

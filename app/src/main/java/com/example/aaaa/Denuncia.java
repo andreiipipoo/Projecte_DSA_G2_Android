@@ -36,6 +36,17 @@ public class Denuncia extends AppCompatActivity {
     Button send;
     ImageButton volver;
     ProgressBar progressBar;
+    String usercreds;
+    String passcreds;
+    private void getCredenciales(){
+        usercreds = getIntent().getExtras().getString("user");
+        passcreds = getIntent().getExtras().getString("pass");
+    }
+    private void setCredenciales(Intent i){
+        i.putExtra("user",usercreds);
+        i.putExtra("pass",passcreds);
+        startActivity(i);
+    }
 
     @SuppressLint("SimpleDateFormat")
     private String obtainDate(String s) {
@@ -55,11 +66,13 @@ public class Denuncia extends AppCompatActivity {
         apiTrappy = Client.getInstance().getApiTrappy();
         apiTrappy = Client.getInstance().getApiTrappy();
         volver = (ImageButton) findViewById(R.id.volverBtn);
+        getCredenciales();
+
         volver.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent i = new Intent(Denuncia.this,NewHome.class);
-                startActivity(i);
+                setCredenciales(i);
             }
         });
 
@@ -83,7 +96,7 @@ public class Denuncia extends AppCompatActivity {
                 sender = senderText.getText().toString();
                 Log.d("Valor username: ", String.valueOf(sender));
 
-                DenunciaModel denuncia = new DenunciaModel(date, title, message, sender);
+                DenunciaModel denuncia = new DenunciaModel(String.valueOf(date), title, message, sender);
 
                 apiTrappy.denunciar(denuncia).enqueue(new Callback<Void>() {
                     @Override
@@ -97,10 +110,10 @@ public class Denuncia extends AppCompatActivity {
                                 public void run() {
                                     // Tu código de actualización de la interfaz de usuario va aquí
                                     Intent i = new Intent(Denuncia.this, Denuncia.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                     progressBar.setVisibility(View.GONE);
                                 }
-                            }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
+                            }, 2000);  // El retraso en milisegundos antes de que se ejecute tu código
 
                         } else if (response.code() == 404) {
                             TextView success = (TextView) findViewById(R.id.Notif);
@@ -111,7 +124,7 @@ public class Denuncia extends AppCompatActivity {
                                 public void run() {
                                     // Tu código de actualización de la interfaz de usuario va aquí
                                     Intent i = new Intent(Denuncia.this, Denuncia.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                     progressBar.setVisibility(View.GONE);
                                 }
                             }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
@@ -126,10 +139,10 @@ public class Denuncia extends AppCompatActivity {
                                 public void run() {
                                     // Tu código de actualización de la interfaz de usuario va aquí
                                     Intent i = new Intent(Denuncia.this, Denuncia.class);
-                                    startActivity(i);
+                                    setCredenciales(i);
                                     progressBar.setVisibility(View.GONE);
                                 }
-                            }, 1000);  // El retraso en milisegundos antes de que se ejecute tu código
+                            }, 2000);  // El retraso en milisegundos antes de que se ejecute tu código
 
                         }
 

@@ -11,16 +11,17 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aaaa.models.Item;
+import com.example.aaaa.models.Message;
 
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private List<Item> items;
+    private List<Message> messages;
     private OnItemClickListener onItemClickListener;
 
 
-    public void setItems(List<Item> value) {
-        this.items = value;
+    public void setItems(List<Message> value) {
+        this.messages = value;
         notifyDataSetChanged();
     }
 
@@ -32,8 +33,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Item item = items.get(position);
-        holder.bind(item);
+        Message message = messages.get(position);
+        holder.bind(message);
     }
     public interface OnItemClickListener {
         void onItemClick(Item item);
@@ -44,32 +45,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return messages.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView nombre;
-        private TextView descripcion;
-        private ImageButton botonImagen;
+        private TextView mensaje1;
+
         //private ImageView featuredImage;
         public ViewHolder(View view) {
             super(view);
-            nombre = view.findViewById(R.id.firstLine);
-            descripcion = view.findViewById(R.id.secondLine);
-            botonImagen = view.findViewById(R.id.botonImagen);
-            botonImagen.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION && onItemClickListener != null) {
-                        onItemClickListener.onItemClick(items.get(position));
-                    }
-                }
-            });
+            mensaje1 = view.findViewById(R.id.firstLine);
+
         }
-        public void bind(Item item) {
-            nombre.setText(item.getNombre());
-            descripcion.setText(item.getDescripcion());
+        public void bind(Message message) {
+            mensaje1.setText(message.getCuerpoMensaje());
 
         }
     }

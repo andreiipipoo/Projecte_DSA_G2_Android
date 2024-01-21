@@ -45,16 +45,28 @@ public class FormularioQuestion extends AppCompatActivity {
     private TextInputEditText messageInput;
     private TextInputEditText senderInput;
     private TextView notif;
+    String usercreds;
+    String passcreds;
+    private void getCredenciales(){
+        usercreds = getIntent().getExtras().getString("user");
+        passcreds = getIntent().getExtras().getString("pass");
+    }
+    private void setCredenciales(Intent i){
+        i.putExtra("user",usercreds);
+        i.putExtra("pass",passcreds);
+        startActivity(i);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_question);
         this.date=obtainDate("yyyy-MM-dd");
+        getCredenciales();
     }
 
     public void returnFunction(View view) {
         Intent intentRegister = new Intent(FormularioQuestion.this, NewHome.class);
-        startActivity(intentRegister);
+        setCredenciales(intentRegister);
     }
 
     public void questionReport(View view){
@@ -78,7 +90,7 @@ public class FormularioQuestion extends AppCompatActivity {
                                 // Tu código de actualización de la interfaz de usuario va aquí
 
                                 Intent i = new Intent(FormularioQuestion.this, FormularioQuestion.class);
-                                startActivity(i);
+                                setCredenciales(i);
                             }
                         }, 2000);  // El retraso en milisegundos antes de que se ejecute tu código
                         break;
@@ -91,7 +103,7 @@ public class FormularioQuestion extends AppCompatActivity {
                                 // Tu código de actualización de la interfaz de usuario va aquí
 
                                 Intent i = new Intent(FormularioQuestion.this, FormularioQuestion.class);
-                                startActivity(i);
+                                setCredenciales(i);
                             }
                         }, 2000);  // El retraso en milisegundos antes de que se ejecute tu código
                         break;
