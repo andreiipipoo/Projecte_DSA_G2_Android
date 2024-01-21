@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Mensajes">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context=".Mensajes">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:background="@color/black">
 
         <TextView
-            android:id="@+id/Notifi"
-            android:layout_width="276dp"
-            android:layout_height="43dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/volver4"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="invisible" />
+                android:id="@+id/Notifi"
+                android:layout_width="276dp"
+                android:layout_height="43dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/volver4"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="invisible"/>
 
         <ImageButton
                 android:id="@+id/volver4"
@@ -39,7 +39,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#E5E5E5"
+            android:background="@color/black"
             android:padding="16dp"
             android:scrollbars="vertical"
             android:visibility="visible"

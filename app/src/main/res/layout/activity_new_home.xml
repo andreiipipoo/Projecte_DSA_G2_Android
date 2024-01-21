@@ -107,7 +107,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="1dp"
                             android:fontFamily="@font/nightmarecodehack"
-                            android:text="Mi Perfil"
+                            android:text="Perfiles"
                             android:textColor="@color/lavender"
                             android:textSize="24sp"/>
 
@@ -117,7 +117,7 @@
                             android:layout_height="100dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="5dp"
-                            android:src="@drawable/perfil1"/>
+                            android:src="@drawable/search"/>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
@@ -258,7 +258,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/scientistName"
-                            android:text="Buscar Perfil"
+                            android:text="Darte de Baja"
                             android:textSize="24sp"
                             android:textColor="@color/lavender"
                             android:layout_marginTop="1dp"
@@ -268,7 +268,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:id="@+id/scientistImage"
-                            android:src="@drawable/search"
+                            android:src="@drawable/borrar"
                             android:layout_marginTop="5dp"
                             android:layout_centerHorizontal="true"/>
                 </RelativeLayout>
@@ -278,7 +278,7 @@
                 android:text="Log Out"
                 android:layout_width="89dp"
                 android:layout_height="38dp" android:id="@+id/logoutbtn"
-                android:textSize="10sp" android:textColor="#F8F8F8"
+                android:textSize="10sp" android:textColor="@color/purple_700"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="8dp" android:layout_marginStart="16dp"
                 android:backgroundTint="@color/lavender"/>
@@ -297,19 +297,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/progressBar5"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/croacky" app:layout_constraintHorizontal_bias="0.481"/>
-
+                app:srcCompat="@drawable/croacky" app:layout_constraintHorizontal_bias="0.703"/>
         <Button
-            android:id="@+id/buttonMsg"
-            android:layout_width="153dp"
-            android:layout_height="39dp"
-            android:backgroundTint="@color/lavender"
-            android:text="Ver mensajes"
-            app:layout_constraintBottom_toTopOf="@+id/row1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.937"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.954" />
+                android:id="@+id/buttonMsg"
+                android:layout_width="153dp"
+                android:layout_height="39dp"
+                android:backgroundTint="@color/lavender"
+                android:text="Ver mensajes"
+                app:layout_constraintBottom_toTopOf="@+id/row1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.937"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.954" android:textColor="@color/purple_700"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

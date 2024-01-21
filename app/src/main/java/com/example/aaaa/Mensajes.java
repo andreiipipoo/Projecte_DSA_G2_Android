@@ -31,10 +31,22 @@ public class Mensajes extends AppCompatActivity {
     APITrappy apiTrappy;
     List<Message> mensajes = new ArrayList<>();
     TextView mensaje;
+    String usercreds;
+    String passcreds;
+    private void getCredenciales(){
+        usercreds = getIntent().getExtras().getString("user");
+        passcreds = getIntent().getExtras().getString("pass");
+    }
+    private void setCredenciales(Intent i){
+        i.putExtra("user",usercreds);
+        i.putExtra("pass",passcreds);
+        startActivity(i);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mensajes);
+        getCredenciales();
         apiTrappy = Client.getInstance().getApiTrappy();
         volver2 = findViewById(R.id.volver4);
 
@@ -42,8 +54,8 @@ public class Mensajes extends AppCompatActivity {
         volver2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent (Mensajes.this, Home.class);
-                startActivity(i);
+                Intent i = new Intent (Mensajes.this, NewHome.class);
+                setCredenciales(i);
             }
         });
 
@@ -54,15 +66,26 @@ public class Mensajes extends AppCompatActivity {
 
         MyAdapter adapter = new MyAdapter();
         recyclerView.setAdapter(adapter);
-        mensaje = (TextView) findViewById(R.id.firstLine);
+        mensaje = (TextView) findViewById(R.id.line);
         apiTrappy = com.example.aaaa.api.Client.getInstance().getApiTrappy();
         //Recogemos los datos que nos mandan desde la función getMessage() del backend (una lista de mensajes)
         apiTrappy.getMessages().enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 if (response.isSuccessful()) {
-                    mensajes = response.body();
+                    /*mensajes = response.body();
+
+                     */
+                    Message list = new Message("pete");
+                    List<Message> lista = list.getData();
                     Log.d("Mensajes",mensajes.toString());
+                    if(!lista.isEmpty()){
+                        adapter.setItems(lista);
+                        Log.d("Mensajes:","Se muestran los mensajes");
+                    }
+                    else{
+                        Log.d("Mensajes:","Ha habido un error mostrando los mensajes.");
+                    }
                 } else {
                     Log.d("ERROR MENSAJE", "HA HABIDO UN ERROR RECIBIENDO LOS MENSAJES");
                 }
@@ -75,13 +98,7 @@ public class Mensajes extends AppCompatActivity {
         });
 
 
-        if(!mensajes.isEmpty()){
-            adapter.setItems(mensajes);
-            Log.d("Mensajes:","Se muestran los mensajes");
-        }
-        else{
-            Log.d("Mensajes:","Ha habido un error mostrando los mensajes.");
-        }
+
         /*
         adapter.setOnItemClickListener(new MyAdapter.OnItemClickListener(){
             @Override
