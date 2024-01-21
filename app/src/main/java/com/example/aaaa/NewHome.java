@@ -113,7 +113,7 @@ public class NewHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+/*
         playCard = findViewById(R.id.playCard);
 
         playCard.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +129,24 @@ public class NewHome extends AppCompatActivity {
             }
         });
 
+ */
+        playCard = findViewById(R.id.playCard);
 
+        playCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("CLICK","CLICK SOBRE JUGAR");
+                progressBar.setVisibility(View.VISIBLE);
+                Intent launchIntent = new Intent();
+                launchIntent.setComponent(new ComponentName("com.DefaultCompany.CROACKY", "com.DefaultCompany.CROACKY.Level1"));
+                if (launchIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(launchIntent);
+                } else {
+                    Log.e("ERROR", "No se pudo resolver la actividad de UnityPlayerActivity");
+                    // Aquí puedes manejar la situación de que la actividad no se resolvió correctamente.
+                }
+            }
+        });
 
         /*
 
